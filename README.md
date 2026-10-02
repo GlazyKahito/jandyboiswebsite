@@ -62,15 +62,15 @@
 
 ## 📖 Overview
 
-A portfolio, teaching-resource archive, and academic CV for **Janardhan Aghav** — *Jandy* to his students — Biology Faculty at **SRJC, Thane, Maharashtra**.
+A portfolio, teaching-resource archive, and academic CV for **Janardhan Aghav** — *Jandy* to his students — Biology Faculty (M.Sc., B.Ed.) at **Shubham Raje Junior College (SRJC), Thane West, Maharashtra**.
 
-It is designed to feel like three things at once: an antique scientific journal, a naturalist's field notebook, and a modern editorial site. The public pages open like a book; behind them sits a full admin CMS so every record on the site can be edited without touching code.
+It is designed to feel like a vintage laboratory instrument crossed with a naturalist's field notebook: serif display type, monospace readouts, a blueprint grid, and brass-on-black colour. The public pages open like a book; behind them sits a full admin CMS so every record on the site can be edited without touching code.
 
 | | |
 | :-- | :-- |
 | **Educator** | Janardhan Aghav (“Jandy”) |
-| **Role** | Senior Biology Faculty · Life Sciences Educator |
-| **Institution** | SRJC, Thane, Maharashtra, India |
+| **Role** | Biology Faculty (M.Sc., B.Ed.) |
+| **Institution** | Shubham Raje Junior College (SRJC), Patlipada, Thane (West) |
 | **Teaches** | Maharashtra State Board HSC Biology · NEET-UG |
 | **Specialisms** | Plant Physiology · Human Anatomy & Physiology · Cytogenetics · Laboratory Histology |
 
@@ -157,13 +157,14 @@ Manage profile, education, experience, skills, achievements, resources (with fil
 
 ## 🎨 Design system
 
-**Vintage dark academia** — walnut, bronze, and parchment — finished with [21st.dev](https://21st.dev)-style micro-interactions.
+**Vintage instrument panel** — ink black, brass, and parchment, with an amber phosphor accent — finished with [21st.dev](https://21st.dev)-style micro-interactions and [Lenis](https://github.com/darkroomengineering/lenis) smooth scrolling.
 
 ### Palette
 
 <div align="center">
 
-![Charcoal](https://img.shields.io/badge/Charcoal-%23191715-191715?style=for-the-badge&labelColor=191715)
+![Ink](https://img.shields.io/badge/Ink-%230E0B08-0E0B08?style=for-the-badge&labelColor=0E0B08)
+![Soot](https://img.shields.io/badge/Soot-%2316110D-16110D?style=for-the-badge&labelColor=16110D)
 ![Deep Walnut](https://img.shields.io/badge/Deep_Walnut-%23211711-211711?style=for-the-badge&labelColor=211711)
 ![Dark Espresso](https://img.shields.io/badge/Dark_Espresso-%23302117-302117?style=for-the-badge&labelColor=302117)
 ![Muted Olive](https://img.shields.io/badge/Muted_Olive-%2373734E-73734E?style=for-the-badge&labelColor=73734E)
@@ -172,6 +173,7 @@ Manage profile, education, experience, skills, achievements, resources (with fil
 ![Muted Gold](https://img.shields.io/badge/Muted_Gold-%23C1A477-C1A477?style=for-the-badge&labelColor=C1A477)
 ![Warm Parchment](https://img.shields.io/badge/Warm_Parchment-%23E8DCC5-E8DCC5?style=for-the-badge&labelColor=E8DCC5)
 ![Aged Ivory](https://img.shields.io/badge/Aged_Ivory-%23F2E9D7-F2E9D7?style=for-the-badge&labelColor=F2E9D7)
+![Phosphor](https://img.shields.io/badge/Phosphor-%23F2A93B-F2A93B?style=for-the-badge&labelColor=F2A93B)
 
 </div>
 
@@ -179,19 +181,24 @@ Manage profile, education, experience, skills, achievements, resources (with fil
 
 | Use | Typeface |
 | :-- | :-- |
-| Headings | **Cormorant Garamond** |
-| Body | **Lora** |
+| Headings | **Fraunces** |
+| Body | **IBM Plex Sans** |
+| Labels & readouts | **IBM Plex Mono** |
 | Marathi & Hindi | **Noto Serif Devanagari** |
 
 ### Motion & light
 
 | Effect | How it works |
 | :-- | :-- |
-| **Film grain** | Procedural SVG fractal noise — a paper texture with no image assets |
-| **Ambient spotlights** | Radial vignette and warm glow framing the page edges |
+| **Smooth scroll** | Lenis drives page scrolling and nav jumps; switched off for visitors who prefer reduced motion |
+| **Blueprint grid & film grain** | A fixed CSS grid and procedural SVG noise — texture with no image assets |
+| **Corner ticks** | Registration marks on every panel, drawn with CSS gradients (`.ticks`) |
 | **`SpotlightCard`** | A highlight that follows the cursor across skill and resource cards |
-| **Sliding pill dock** | Floating glass nav; the active pill glides with `layoutId="activeNavPill"` on a spring (`stiffness: 400, damping: 30`) |
-| **Category tabs** | The same shared-layout trick, `layoutId="categoryPill"`, across resource categories |
+| **Sliding pill dock** | The active nav pill glides with `layoutId="activeNavPill"` on a spring (`stiffness: 400, damping: 30`) |
+| **Scroll-lit quote** | Words in the pull quote light up one by one as it scrolls into view |
+| **Scroll bands** | Oversized outlined type that drifts sideways with scroll position |
+| **Parallax hero** | The specimen plate and title move at different rates; a live IST clock sits in the readout strip |
+| **Scroll progress** | A phosphor hairline across the top of the page |
 | **Button shimmer** | A diagonal light sweep on primary actions (`btn-shimmer`) |
 
 ---
@@ -266,7 +273,7 @@ jandyboiswebsite/
 | UI | **React 19**, JavaScript (`.jsx`) | Frontend kept in plain JS by request |
 | Server | **TypeScript** (`.ts`) | Typed routes, store, and generators |
 | Styling | **Tailwind CSS v4** | Custom dark-academia tokens |
-| Motion | **Framer Motion** | Spring physics and shared-layout transitions |
+| Motion | **Framer Motion** + **Lenis** | Spring physics, scroll-linked animation, smooth scrolling |
 | Icons | **Lucide React** | |
 | PDFs | **jsPDF** | CV and folio generation on the server |
 | Auth | **bcryptjs** + **jose** | Hashed password, signed JWT in an `httpOnly` cookie (7-day session) |
@@ -367,7 +374,7 @@ Deployed on **Vercel** at [jandyboiswebsite.vercel.app](https://jandyboiswebsite
 
 ## 📜 Academic integrity
 
-The affiliation with SRJC Thane is verified. Sample records — degrees, awards, experience details — are **provisional demo content**, labelled as such on the site, and fully editable by Professor Aghav through the faculty admin.
+The affiliation with Shubham Raje Junior College (SRJC), Thane West, the M.Sc. and B.Ed. qualifications, and the pull quote come from the college's [faculty page](https://shubhamrajecollege.com/8697_faculty.html). Sample records — degrees, awards, experience details — are **provisional demo content**, labelled as such on the site, and fully editable by Professor Aghav through the faculty admin.
 
 <div align="center">
 

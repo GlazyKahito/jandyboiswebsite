@@ -2,79 +2,59 @@
 
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { Award, Calendar, BookmarkCheck, ShieldAlert } from 'lucide-react';
+import { ShieldAlert } from 'lucide-react';
+import SectionHeading from '@/components/ui/SectionHeading';
+import Reveal from '@/components/ui/Reveal';
 
 export default function AchievementsSection({ achievements = [] }) {
   const { t } = useLanguage();
 
   return (
-    <section id="achievements" className="py-20 px-4 sm:px-6 relative bg-[#1c130d] border-t border-[#A67C52]/20">
-      <div className="max-w-4xl mx-auto">
-        
-        {/* Header */}
-        <div className="text-center mb-14 space-y-2">
-          <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.2em] text-[#C1A477]">
-            <Award size={15} className="text-[#A67C52]" />
-            <span>Honours &amp; Accolades</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#F2E9D7]">
-            {t('nav_achievements') || 'Milestones & Recognitions'}
-          </h2>
-          <p className="text-sm font-serif italic text-[#A67C52]">
-            Educational Contributions &amp; Academic Commendations
-          </p>
-        </div>
+    <section id="achievements" className="relative border-t border-line px-4 py-24 sm:px-6 sm:py-32">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          index="06"
+          label="Honours & Accolades"
+          title={t('nav_achievements') || 'Milestones & Recognitions'}
+          subtitle="Educational Contributions & Academic Commendations"
+        />
 
-        {/* Achievement Grid */}
-        <div className="space-y-6">
+        {/* Honours ledger */}
+        <div className="border-t border-line">
           {achievements.map((item, idx) => (
-            <div
-              key={item.id || idx}
-              className="academic-panel rounded-lg p-6 transition-all academic-panel-hover flex flex-col sm:flex-row items-start justify-between gap-4"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#302117] border border-[#A67C52] flex items-center justify-center shrink-0 text-[#C1A477] mt-1">
-                  <BookmarkCheck size={20} />
+            <Reveal key={item.id || idx} delay={idx * 0.05}>
+              <article className="group grid grid-cols-1 gap-3 border-b border-line py-7 transition-colors hover:bg-gold/[0.03] md:grid-cols-12 md:items-baseline md:gap-8 md:px-4">
+                <div className="font-serif text-3xl font-light text-gold md:col-span-2 sm:text-4xl">
+                  {item.year}
                 </div>
-                
-                <div className="space-y-1">
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <h3 className="text-lg font-serif font-bold text-[#F2E9D7]">
+
+                <div className="md:col-span-6">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3 className="font-serif text-xl text-ivory transition-colors group-hover:text-gold sm:text-2xl">
                       {item.title}
                     </h3>
                     {item.isDemo && (
-                      <span className="text-[10px] font-mono text-[#A67C52] bg-[#211711] px-2 py-0.5 rounded border border-[#A67C52]/30">
+                      <span className="border border-line px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-bronze">
                         Demo Milestone
                       </span>
                     )}
                   </div>
-
-                  <div className="text-xs font-serif text-[#C1A477] font-medium">
-                    {item.issuer}
-                  </div>
-
-                  <p className="text-xs sm:text-sm font-serif text-[#E8DCC5]/80 leading-relaxed pt-1">
-                    {item.description}
-                  </p>
+                  <div className="label mt-2">{item.issuer}</div>
                 </div>
-              </div>
 
-              <div className="shrink-0 flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-[#A67C52]/20">
-                <div className="flex items-center gap-1 text-xs font-mono text-[#A67C52]">
-                  <Calendar size={13} />
-                  <span>{item.year}</span>
-                </div>
-              </div>
-            </div>
+                <p className="text-sm leading-relaxed text-parchment/65 md:col-span-4">
+                  {item.description}
+                </p>
+              </article>
+            </Reveal>
           ))}
         </div>
 
         {/* Demo disclaimer banner */}
-        <div className="mt-8 p-3 bg-[#302117]/50 border border-[#A67C52]/30 rounded text-center text-xs font-mono text-[#A67C52]/80 flex items-center justify-center gap-2">
-          <ShieldAlert size={14} />
+        <div className="mt-8 flex items-center gap-2 font-mono text-[11px] text-bronze/80">
+          <ShieldAlert size={13} className="shrink-0" />
           <span>Awards displayed represent editable sample records for demonstration purposes.</span>
         </div>
-
       </div>
     </section>
   );

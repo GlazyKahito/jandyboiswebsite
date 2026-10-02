@@ -1,13 +1,35 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
-import { FileDown, Send, BookOpen, Sparkles } from 'lucide-react';
-import SpotlightCard from '@/components/ui/SpotlightCard';
+import { useSmoothScroll } from '@/components/layout/SmoothScroll';
+import { FileDown, ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import LiveClock from '@/components/ui/LiveClock';
+
+const TICKER = [
+  'Plant Physiology',
+  'Human Anatomy',
+  'Cytogenetics',
+  'Laboratory Histology',
+  'HSC Biology',
+  'NEET-UG',
+  'Botany',
+  'Zoology',
+];
+
+// Facts as listed on the college's faculty page
+const READOUTS = [
+  { value: 'Biology', label: 'Subject' },
+  { value: 'M.Sc., B.Ed.', label: 'Qualification' },
+  { value: 'XI & XII', label: 'Classes · HSC Board' },
+];
+
+const ease = [0.16, 1, 0.3, 1];
 
 export default function HeroSection({ profile }) {
   const { t } = useLanguage();
+  const { scrollTo } = useSmoothScroll();
 
   const p = profile || {
     name: 'Janardhan Aghav',
@@ -18,140 +40,171 @@ export default function HeroSection({ profile }) {
     photoUrl: '/images/portrait_jandy_engraving.svg',
   };
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  const [firstName, ...restName] = (p.name || '').split(' ');
+
+  // Parallax: the plate drifts up and the title sinks slightly while scrolling away
+  const { scrollY } = useScroll();
+  const plateY = useTransform(scrollY, [0, 900], [0, -70]);
+  const titleY = useTransform(scrollY, [0, 900], [0, 50]);
 
   return (
-    <section id="hero" className="relative min-h-screen pt-36 pb-24 px-4 sm:px-6 flex items-center justify-center bg-grain overflow-hidden">
-      {/* 21st.dev Cinematic Vignette & Dynamic Ambient Lighting */}
-      <div className="absolute inset-0 cinematic-vignette" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] bg-[#A67C52]/12 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-[#73734E]/10 rounded-full blur-[120px] pointer-events-none" />
+    <section id="hero" className="relative flex min-h-screen flex-col overflow-hidden pt-32 sm:pt-36">
+      {/* Ambient lighting */}
+      <div className="cinematic-vignette absolute inset-0" />
+      <div className="pointer-events-none absolute left-1/4 top-1/4 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-phosphor/[0.07] blur-[150px]" />
 
-      <div className="max-w-6xl mx-auto w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* Left Column: Academic Title & Call to Action */}
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 text-left space-y-6"
-          >
-            {/* Header Badge & Institutional Colophon */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#302117]/85 border border-[#A67C52]/50 rounded-full text-xs font-serif text-[#C1A477] shadow-inner backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-[#C1A477] animate-pulse" />
-              <span>{t('hero_greeting') || "Naturalist & Educator's Archive"}</span>
-              <span className="text-[#A67C52]/60">•</span>
-              <span className="font-mono text-[11px] text-[#E8DCC5]/90">{p.institution}</span>
-            </div>
+      <div className="relative z-10 mx-auto w-full max-w-7xl flex-1 px-4 sm:px-6">
+        <div className="grid grid-cols-1 items-end gap-12 lg:grid-cols-12 lg:gap-10">
 
-            {/* Main Name Heading with 21st.dev Gold Gradient */}
-            <div className="space-y-1.5">
-              <div className="flex items-baseline gap-3 flex-wrap">
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold text-gold-gradient tracking-tight leading-[1.05]">
-                  {p.name}
-                </h1>
-                <span className="text-xl sm:text-2xl font-serif italic text-[#C1A477] border-b border-[#A67C52]/50 pb-0.5">
-                  ({p.displayName})
+          {/* Left: title block */}
+          <motion.div style={{ y: titleY }} className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease }}
+              className="label flex flex-wrap items-center gap-x-3 gap-y-1"
+            >
+              <span className="blink h-1.5 w-1.5 bg-phosphor" />
+              <span className="text-gold">{t('hero_greeting') || "Naturalist & Educator's Archive"}</span>
+              <span className="text-bronze/50">/</span>
+              <span>{p.institution}</span>
+            </motion.div>
+
+            <h1 className="mt-7 break-words font-serif text-[clamp(3.25rem,8.6vw,7.75rem)] font-light leading-[0.92] text-ivory">
+              <motion.span
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.05, ease }}
+                className="block"
+              >
+                {firstName}
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.15, ease }}
+                className="block italic text-gold-gradient"
+              >
+                {restName.join(' ')}
+              </motion.span>
+            </h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease }}
+              className="mt-8 space-y-6"
+            >
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <span className="border border-gold/40 px-2 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-gold">
+                  aka “{p.displayName}”
+                </span>
+                <span className="font-serif text-xl text-parchment sm:text-2xl">
+                  {t('hero_title') || p.title}
                 </span>
               </div>
-              <p className="text-lg sm:text-xl font-serif text-[#E8DCC5] font-medium tracking-wide">
-                {t('hero_title') || p.title}
+
+              <p className="max-w-xl text-[15px] leading-relaxed text-parchment/75 sm:text-base">
+                {t('hero_tagline') || "Exploring the intricate architecture of living systems, inspiring scientific curiosity, and guiding students towards mastery in Maharashtra State Board & NEET-UG Biology."}
               </p>
-              <p className="text-xs font-mono text-[#A67C52] uppercase tracking-widest">
-                {p.location}
-              </p>
-            </div>
 
-            {/* Editorial Tagline */}
-            <p className="text-sm sm:text-base font-serif text-[#E8DCC5]/85 leading-relaxed max-w-xl">
-              {t('hero_tagline') || "Exploring the intricate architecture of living systems, inspiring scientific curiosity, and guiding students towards mastery in Maharashtra State Board & NEET-UG Biology."}
-            </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <button onClick={() => scrollTo('resources')} className="btn btn-primary btn-shimmer">
+                  <span>{t('hero_cta_explore') || "Examine Field Notes"}</span>
+                  <ArrowDownRight size={14} />
+                </button>
 
-            {/* Metric Strip (21st.dev Interactive Cards) */}
-            <div className="grid grid-cols-3 gap-3 py-3 border-y border-[#A67C52]/30 max-w-lg">
-              <div className="p-2 rounded bg-[#302117]/30 border border-[#A67C52]/20 text-center sm:text-left transition-colors hover:border-[#C1A477]/40">
-                <span className="block text-2xl font-serif font-bold text-gold-gradient">8+</span>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#A67C52]">Years Mentorship</span>
+                <a
+                  href="/api/resume/download"
+                  download="Janardhan_Aghav_Jandy_Resume.pdf"
+                  className="btn btn-ghost"
+                >
+                  <FileDown size={14} className="text-gold" />
+                  <span>{t('hero_cta_resume') || "Download Résumé (PDF)"}</span>
+                </a>
+
+                <button
+                  onClick={() => scrollTo('contact')}
+                  className="group flex items-center gap-1.5 px-2 py-3 font-mono text-[11px] uppercase tracking-[0.12em] text-gold transition-colors hover:text-phosphor"
+                >
+                  <span>{t('hero_cta_contact') || "Direct Inquiry"}</span>
+                  <ArrowUpRight size={14} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </button>
               </div>
-              <div className="p-2 rounded bg-[#302117]/30 border border-[#A67C52]/20 text-center sm:text-left transition-colors hover:border-[#C1A477]/40">
-                <span className="block text-2xl font-serif font-bold text-gold-gradient">1,200+</span>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#A67C52]">Students Guided</span>
-              </div>
-              <div className="p-2 rounded bg-[#302117]/30 border border-[#A67C52]/20 text-center sm:text-left transition-colors hover:border-[#C1A477]/40">
-                <span className="block text-2xl font-serif font-bold text-gold-gradient">340+</span>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#A67C52]">NEET Bio Scores</span>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
-                onClick={() => scrollTo('resources')}
-                className="btn-shimmer flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#C1A477] to-[#A67C52] text-[#211711] font-serif font-bold text-xs sm:text-sm tracking-wide rounded hover:opacity-95 transition-all shadow-lg active:scale-95"
-              >
-                <BookOpen size={16} />
-                <span>{t('hero_cta_explore') || "Examine Field Notes"}</span>
-              </button>
-
-              <a
-                href="/api/resume/download"
-                download="Janardhan_Aghav_Jandy_Resume.pdf"
-                className="flex items-center gap-2 px-4 py-2.5 bg-[#302117]/80 text-[#E8DCC5] border border-[#A67C52] font-serif text-xs sm:text-sm tracking-wide rounded hover:bg-[#A67C52]/25 hover:text-[#F2E9D7] transition-all shadow backdrop-blur-md"
-              >
-                <FileDown size={16} className="text-[#C1A477]" />
-                <span>{t('hero_cta_resume') || "Download Résumé (PDF)"}</span>
-              </a>
-
-              <button
-                onClick={() => scrollTo('contact')}
-                className="flex items-center gap-2 px-4 py-2.5 text-[#C1A477] hover:text-[#F2E9D7] font-serif text-xs sm:text-sm transition-colors"
-              >
-                <Send size={15} />
-                <span>{t('hero_cta_contact') || "Direct Inquiry"}</span>
-              </button>
-            </div>
+            </motion.div>
           </motion.div>
 
-          {/* Right Column: 21st.dev Spotlight Portrait Card */}
+          {/* Right: specimen plate */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 flex justify-center"
+            transition={{ duration: 1, delay: 0.2, ease }}
+            className="flex justify-center lg:col-span-5 lg:justify-end"
           >
-            <SpotlightCard className="w-72 sm:w-84 md:w-96 aspect-[4/5] p-3 border-2 border-[#A67C52]/80 shadow-2xl">
-              {/* Inner ornamental border */}
-              <div className="absolute inset-2 border border-[#C1A477]/30 pointer-events-none rounded" />
-              
-              {/* Naturalist Portrait Canvas */}
-              <div className="w-full h-full rounded overflow-hidden relative bg-[#211711] flex flex-col justify-between p-4">
+            <motion.figure style={{ y: plateY }} className="panel ticks w-full max-w-sm p-3">
+              <div className="label flex items-center justify-between pb-3">
+                <span>Plate 01</span>
+                <span className="text-moss">Specimen: Educator</span>
+              </div>
+
+              <div className="relative aspect-[4/5] overflow-hidden bg-walnut">
                 <img
                   src={p.photoUrl || "/images/portrait_jandy_engraving.svg"}
                   alt={p.name}
-                  className="w-full h-[78%] object-contain filter contrast-105 transition-transform duration-500 hover:scale-102"
+                  className="h-full w-full object-contain p-4"
                 />
-
-                <div className="text-center pt-2 border-t border-[#A67C52]/40">
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-[#A67C52] block">
-                    Curated Naturalist Dossier
-                  </span>
-                  <span className="text-xs font-serif italic text-[#E8DCC5] block">
-                    "Scientia et Natura" • SRJC Thane
-                  </span>
-                </div>
+                <div className="scanlines pointer-events-none absolute inset-0" />
+                {/* Crosshair */}
+                <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-phosphor/15" />
+                <div className="pointer-events-none absolute inset-y-0 left-1/2 w-px bg-phosphor/15" />
+                <span className="absolute left-2 top-2 font-mono text-[9px] uppercase tracking-widest text-bronze">x 1.00</span>
+                <span className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-widest text-bronze">Fig. A</span>
               </div>
 
-              {/* Antique wax seal badge in bottom corner */}
-              <div className="absolute -bottom-3 -right-3 w-14 h-14 rounded-full bg-gradient-to-br from-[#735334] to-[#3a281d] border-2 border-[#C1A477] shadow-xl flex items-center justify-center text-[#F2E9D7] text-[10px] font-serif font-bold text-center leading-tight">
-                SRJC<br/>BIO
-              </div>
-            </SpotlightCard>
+              <figcaption className="flex items-end justify-between gap-3 pt-3">
+                <span className="font-serif text-base italic text-parchment">“Scientia et Natura”</span>
+                <span className="label text-right">{p.location}</span>
+              </figcaption>
+            </motion.figure>
           </motion.div>
+        </div>
 
+        {/* Instrument readout strip */}
+        <motion.dl
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="mt-14 grid grid-cols-3 border-y border-line lg:mt-20 lg:grid-cols-4"
+        >
+          {READOUTS.map((m, idx) => (
+            <div key={m.label} className={`py-5 pr-3 ${idx > 0 ? 'border-l border-line pl-4 sm:pl-6' : ''}`}>
+              <dt className="label">{m.label}</dt>
+              <dd className="mt-2 font-serif text-xl font-light text-ivory sm:text-4xl">{m.value}</dd>
+            </div>
+          ))}
+          <div className="col-span-3 border-t border-line py-5 lg:col-span-1 lg:border-l lg:border-t-0 lg:pl-6">
+            <dt className="label">Station</dt>
+            <dd className="mt-2 font-mono text-xs leading-relaxed text-parchment/80">
+              19.2183° N, 72.9781° E
+              <span className="block text-gold"><LiveClock /></span>
+              <span className="block text-moss">
+                <span className="blink mr-1.5 inline-block h-1.5 w-1.5 bg-moss align-middle" />
+                Accepting enquiries
+              </span>
+            </dd>
+          </div>
+        </motion.dl>
+      </div>
+
+      {/* Subject ticker */}
+      <div className="relative z-10 mt-10 overflow-hidden border-y border-line bg-soot/60" aria-hidden="true">
+        <div className="marquee flex w-max py-3">
+          {[...TICKER, ...TICKER].map((item, idx) => (
+            <span key={idx} className="label flex items-center whitespace-nowrap pr-10 text-parchment/60">
+              <span className="mr-10 text-phosphor">✦</span>
+              {item}
+            </span>
+          ))}
         </div>
       </div>
     </section>

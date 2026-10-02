@@ -1,22 +1,30 @@
-import { Cormorant_Garamond, Lora, Noto_Serif_Devanagari } from "next/font/google";
+import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono, Noto_Serif_Devanagari } from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
   display: "swap",
 });
 
-const lora = Lora({
-  variable: "--font-lora",
+const plexSans = IBM_Plex_Sans({
+  variable: "--font-plex-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
 });
 
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
 const notoDevanagari = Noto_Serif_Devanagari({
-  variable: "--font-devanagari",
+  variable: "--font-noto-deva",
   subsets: ["devanagari"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -24,8 +32,8 @@ const notoDevanagari = Noto_Serif_Devanagari({
 
 export const metadata = {
   title: "Janardhan Aghav (Jandy) | Biology Educator — SRJC, Thane",
-  description: "Academic portfolio and teaching archive of Janardhan Aghav (Jandy), Biology Faculty at SRJC, Thane, Maharashtra. Vintage dark academia portfolio with educational resources and curriculum notes.",
-  keywords: ["Janardhan Aghav", "Jandy", "Biology Educator", "SRJC Thane", "Biology Faculty", "NEET Biology", "Maharashtra HSC Biology", "Academic Portfolio"],
+  description: "Academic portfolio and teaching archive of Janardhan Aghav (Jandy), Biology Faculty at Shubham Raje Junior College (SRJC), Thane West, Maharashtra. Biology resources, lecture notes and curriculum insights.",
+  keywords: ["Janardhan Aghav", "Jandy", "Biology Educator", "SRJC Thane", "Shubham Raje Junior College", "Biology Faculty", "NEET Biology", "Maharashtra HSC Biology", "Academic Portfolio"],
   authors: [{ name: "Janardhan Aghav" }],
   creator: "Janardhan Aghav",
   openGraph: {
@@ -40,9 +48,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${lora.variable} ${notoDevanagari.variable} dark scroll-smooth`}
+      className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable} ${notoDevanagari.variable} dark`}
     >
-      <body className="min-h-screen bg-[#211711] text-[#E8DCC5] font-serif antialiased selection:bg-[#A67C52] selection:text-[#211711]">
+      <body className="min-h-screen bg-ink text-parchment font-sans antialiased">
         {children}
       </body>
     </html>

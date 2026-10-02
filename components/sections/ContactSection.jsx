@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { Send, CheckCircle2, AlertCircle, Mail, MapPin, Building, Clock } from 'lucide-react';
+import SectionHeading from '@/components/ui/SectionHeading';
+import Reveal from '@/components/ui/Reveal';
 
 export default function ContactSection({ profile }) {
   const { t } = useLanguage();
@@ -83,79 +85,75 @@ export default function ContactSection({ profile }) {
   };
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 relative bg-[#1c130d] border-t border-[#A67C52]/20">
-      <div className="max-w-5xl mx-auto">
-        
-        {/* Header */}
-        <div className="text-center mb-16 space-y-2">
-          <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.2em] text-[#C1A477]">
-            <Mail size={15} className="text-[#A67C52]" />
-            <span>Epistolary Desk</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#F2E9D7]">
-            {t('contact_title') || 'Epistolary Correspondence'}
-          </h2>
-          <p className="text-sm sm:text-base font-serif italic text-[#A67C52]">
-            {t('contact_subtitle') || 'Send an Inquiry to Professor Janardhan Aghav'}
-          </p>
-        </div>
+    <section id="contact" className="relative border-t border-line px-4 py-24 sm:px-6 sm:py-32">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          index="08"
+          label="Epistolary Desk"
+          title={t('contact_title') || 'Epistolary Correspondence'}
+          subtitle={t('contact_subtitle') || 'Send an Inquiry to Professor Janardhan Aghav'}
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-16">
           
           {/* Left Column: Faculty Office Dossier */}
-          <div className="md:col-span-5 space-y-6">
-            <div className="academic-panel rounded-lg p-6 space-y-4">
-              <h3 className="text-lg font-serif font-bold text-[#F2E9D7] border-b border-[#A67C52]/30 pb-2">
-                Faculty Address &amp; Chambers
-              </h3>
+          <Reveal className="lg:col-span-5">
+            <h3 className="label text-phosphor">Faculty Address &amp; Chambers</h3>
 
-              <div className="space-y-3 text-xs sm:text-sm font-serif">
-                <div className="flex items-start gap-3 text-[#E8DCC5]/80">
-                  <Building size={16} className="text-[#A67C52] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block font-semibold text-[#F2E9D7]">{p.institution}</span>
-                    <span className="text-xs text-[#73734E]">Department of Biological Sciences</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 text-[#E8DCC5]/80">
-                  <MapPin size={16} className="text-[#A67C52] shrink-0 mt-0.5" />
-                  <span>{p.location}</span>
-                </div>
-
-                <div className="flex items-start gap-3 text-[#E8DCC5]/80">
-                  <Mail size={16} className="text-[#A67C52] shrink-0 mt-0.5" />
-                  <a href={`mailto:${p.email}`} className="hover:text-[#C1A477] transition-colors underline">
-                    {p.email}
-                  </a>
-                </div>
-
-                <div className="flex items-start gap-3 text-[#E8DCC5]/80">
-                  <Clock size={16} className="text-[#A67C52] shrink-0 mt-0.5" />
-                  <span>Consultation: Post-Lecture Hours (Monday – Friday)</span>
+            <dl className="mt-4 divide-y divide-line border-y border-line text-sm">
+              <div className="flex items-start gap-4 py-4">
+                <Building size={16} strokeWidth={1.5} className="mt-0.5 shrink-0 text-gold" />
+                <div>
+                  <dt className="label">Institution</dt>
+                  <dd className="mt-1 text-ivory">{p.institution}</dd>
+                  <dd className="text-xs text-moss">Department of Biological Sciences</dd>
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#A67C52]/20">
-                <p className="text-[11px] font-mono text-[#A67C52]">
-                  Notice: All academic notes, student queries, and lecture collaboration requests are catalogued in the faculty registry.
-                </p>
+              <div className="flex items-start gap-4 py-4">
+                <MapPin size={16} strokeWidth={1.5} className="mt-0.5 shrink-0 text-gold" />
+                <div>
+                  <dt className="label">Location</dt>
+                  <dd className="mt-1 text-parchment/85">{p.location}</dd>
+                </div>
               </div>
-            </div>
-          </div>
+
+              <div className="flex items-start gap-4 py-4">
+                <Mail size={16} strokeWidth={1.5} className="mt-0.5 shrink-0 text-gold" />
+                <div>
+                  <dt className="label">Email</dt>
+                  <dd className="mt-1">
+                    <a href={`mailto:${p.email}`} className="break-all text-parchment/85 underline decoration-gold/40 underline-offset-4 transition-colors hover:text-phosphor">
+                      {p.email}
+                    </a>
+                  </dd>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 py-4">
+                <Clock size={16} strokeWidth={1.5} className="mt-0.5 shrink-0 text-gold" />
+                <div>
+                  <dt className="label">Consultation</dt>
+                  <dd className="mt-1 text-parchment/85">Post-Lecture Hours (Monday – Friday)</dd>
+                </div>
+              </div>
+            </dl>
+
+            <p className="mt-5 font-mono text-[11px] leading-relaxed text-bronze/80">
+              Notice: All academic notes, student queries, and lecture collaboration requests are catalogued in the faculty registry.
+            </p>
+          </Reveal>
 
           {/* Right Column: Correspondence Form */}
-          <div className="md:col-span-7">
-            <div className="academic-panel rounded-lg p-6 sm:p-8 relative">
+          <Reveal delay={0.1} className="lg:col-span-7">
+            <div className="panel ticks p-6 sm:p-10">
               {submitted ? (
-                <div className="text-center py-12 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-[#302117] border-2 border-[#A67C52] flex items-center justify-center mx-auto text-[#C1A477]">
-                    <CheckCircle2 size={30} />
-                  </div>
-                  <h3 className="text-2xl font-serif font-bold text-[#F2E9D7]">
+                <div className="space-y-4 py-12 text-center">
+                  <CheckCircle2 size={34} strokeWidth={1.25} className="mx-auto text-moss" />
+                  <h3 className="font-serif text-3xl font-light text-ivory">
                     Correspondence Recorded
                   </h3>
-                  <p className="text-xs sm:text-sm font-serif text-[#E8DCC5]/80 max-w-md mx-auto leading-relaxed">
+                  <p className="mx-auto max-w-md text-sm leading-relaxed text-parchment/75">
                     {t('contact_success') || "Your correspondence has been securely recorded. An acknowledgement copy has been dispatched to the faculty archive."}
                   </p>
                   <button
@@ -170,13 +168,13 @@ export default function ContactSection({ profile }) {
                         honeypot: '',
                       });
                     }}
-                    className="mt-4 px-4 py-2 text-xs font-mono uppercase bg-[#302117] border border-[#A67C52] text-[#C1A477] hover:bg-[#A67C52] hover:text-[#211711] transition-all rounded"
+                    className="btn btn-ghost mt-4"
                   >
                     Draft Another Letter
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-7">
                   {/* Honeypot hidden input */}
                   <input
                     type="text"
@@ -189,16 +187,16 @@ export default function ContactSection({ profile }) {
                   />
 
                   {serverError && (
-                    <div className="p-3 bg-red-950/40 border border-red-800/60 rounded text-red-200 text-xs flex items-center gap-2">
+                    <div className="flex items-center gap-2 border border-red-500/50 bg-red-950/30 p-3 font-mono text-xs text-red-200">
                       <AlertCircle size={14} className="shrink-0" />
                       <span>{serverError}</span>
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-7 sm:grid-cols-2">
                     {/* Name */}
-                    <div className="space-y-1">
-                      <label className="text-xs font-mono uppercase text-[#A67C52] block">
+                    <div>
+                      <label className="label block">
                         {t('contact_name_label') || "Your Full Name"} *
                       </label>
                       <input
@@ -206,16 +204,14 @@ export default function ContactSection({ profile }) {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g., Rajesh Sharma"
-                        className={`w-full px-3.5 py-2 bg-[#191715] border rounded text-xs sm:text-sm text-[#E8DCC5] focus:outline-none focus:border-[#C1A477] transition-colors ${
-                          errors.name ? 'border-red-500' : 'border-[#A67C52]/40'
-                        }`}
+                        className={`field ${errors.name ? 'field-error' : ''}`}
                       />
-                      {errors.name && <span className="text-[11px] text-red-400 font-mono block">{errors.name}</span>}
+                      {errors.name && <span className="mt-1.5 block font-mono text-[11px] text-red-400">{errors.name}</span>}
                     </div>
 
                     {/* Email */}
-                    <div className="space-y-1">
-                      <label className="text-xs font-mono uppercase text-[#A67C52] block">
+                    <div>
+                      <label className="label block">
                         {t('contact_email_label') || "Official Email Address"} *
                       </label>
                       <input
@@ -223,27 +219,25 @@ export default function ContactSection({ profile }) {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="e.g., rajesh@domain.edu"
-                        className={`w-full px-3.5 py-2 bg-[#191715] border rounded text-xs sm:text-sm text-[#E8DCC5] focus:outline-none focus:border-[#C1A477] transition-colors ${
-                          errors.email ? 'border-red-500' : 'border-[#A67C52]/40'
-                        }`}
+                        className={`field ${errors.email ? 'field-error' : ''}`}
                       />
-                      {errors.email && <span className="text-[11px] text-red-400 font-mono block">{errors.email}</span>}
+                      {errors.email && <span className="mt-1.5 block font-mono text-[11px] text-red-400">{errors.email}</span>}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-7 sm:grid-cols-2">
                     {/* Purpose */}
-                    <div className="space-y-1">
-                      <label className="text-xs font-mono uppercase text-[#A67C52] block">
+                    <div>
+                      <label className="label block">
                         {t('contact_purpose_label') || "Nature of Inquiry"}
                       </label>
                       <select
                         value={formData.purpose}
                         onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}
-                        className="w-full px-3 py-2 bg-[#191715] border border-[#A67C52]/40 rounded text-xs sm:text-sm text-[#E8DCC5] focus:outline-none focus:border-[#C1A477] transition-colors"
+                        className="field"
                       >
                         {purposes.map((p) => (
-                          <option key={p} value={p} className="bg-[#211711] text-[#E8DCC5]">
+                          <option key={p} value={p} className="bg-soot text-parchment">
                             {p}
                           </option>
                         ))}
@@ -251,8 +245,8 @@ export default function ContactSection({ profile }) {
                     </div>
 
                     {/* Subject */}
-                    <div className="space-y-1">
-                      <label className="text-xs font-mono uppercase text-[#A67C52] block">
+                    <div>
+                      <label className="label block">
                         {t('contact_subject_label') || "Subject Matter"} *
                       </label>
                       <input
@@ -260,17 +254,15 @@ export default function ContactSection({ profile }) {
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                         placeholder="e.g., Query regarding Plant Morphology"
-                        className={`w-full px-3.5 py-2 bg-[#191715] border rounded text-xs sm:text-sm text-[#E8DCC5] focus:outline-none focus:border-[#C1A477] transition-colors ${
-                          errors.subject ? 'border-red-500' : 'border-[#A67C52]/40'
-                        }`}
+                        className={`field ${errors.subject ? 'field-error' : ''}`}
                       />
-                      {errors.subject && <span className="text-[11px] text-red-400 font-mono block">{errors.subject}</span>}
+                      {errors.subject && <span className="mt-1.5 block font-mono text-[11px] text-red-400">{errors.subject}</span>}
                     </div>
                   </div>
 
                   {/* Message */}
-                  <div className="space-y-1">
-                    <label className="text-xs font-mono uppercase text-[#A67C52] block">
+                  <div>
+                    <label className="label block">
                       {t('contact_message_label') || "Detailed Message"} *
                     </label>
                     <textarea
@@ -278,17 +270,15 @@ export default function ContactSection({ profile }) {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Write your dispatch here..."
-                      className={`w-full px-3.5 py-2 bg-[#191715] border rounded text-xs sm:text-sm text-[#E8DCC5] focus:outline-none focus:border-[#C1A477] transition-colors ${
-                        errors.message ? 'border-red-500' : 'border-[#A67C52]/40'
-                      }`}
+                      className={`field ${errors.message ? 'field-error' : ''}`}
                     />
-                    {errors.message && <span className="text-[11px] text-red-400 font-mono block">{errors.message}</span>}
+                    {errors.message && <span className="mt-1.5 block font-mono text-[11px] text-red-400">{errors.message}</span>}
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full flex items-center justify-center gap-2 py-3 bg-[#A67C52] text-[#211711] font-serif font-bold text-xs sm:text-sm tracking-wider uppercase rounded hover:bg-[#C1A477] transition-all shadow-md active:scale-95 disabled:opacity-50"
+                    className="btn btn-primary btn-shimmer w-full py-4 disabled:opacity-50"
                   >
                     <Send size={15} />
                     <span>{loading ? (t('contact_submitting') || "Sealing Envelope...") : (t('contact_submit_btn') || "Dispatch Correspondence")}</span>
@@ -296,10 +286,9 @@ export default function ContactSection({ profile }) {
                 </form>
               )}
             </div>
-          </div>
+          </Reveal>
 
         </div>
-
       </div>
     </section>
   );

@@ -1,37 +1,26 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
-import { 
-  FileDown, 
-  Send, 
-  Globe, 
-  Menu, 
-  X, 
-  Sparkles, 
-  BookOpen, 
-  GraduationCap, 
-  Briefcase, 
-  Award, 
-  FolderDown, 
-  Compass,
-  Lock
-} from 'lucide-react';
+import { useSmoothScroll } from '@/components/layout/SmoothScroll';
+import { FileDown, Globe, Menu, X, Lock } from 'lucide-react';
+
+const SECTION_IDS = ['hero', 'about', 'education', 'experience', 'skills', 'achievements', 'resources', 'contact'];
 
 export default function FloatingNav() {
   const { language, setLanguage, t } = useLanguage();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollTo: smoothScrollTo } = useSmoothScroll();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
-
-      const sections = ['hero', 'about', 'education', 'experience', 'skills', 'achievements', 'resources', 'contact'];
-      for (const id of sections) {
+      for (const id of SECTION_IDS) {
         const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
@@ -43,104 +32,110 @@ export default function FloatingNav() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { id: 'hero', label: t('nav_home') || 'Archive', icon: Compass },
-    { id: 'about', label: t('nav_about') || 'About', icon: BookOpen },
-    { id: 'education', label: t('nav_education') || 'Education', icon: GraduationCap },
-    { id: 'experience', label: t('nav_experience') || 'Chronicles', icon: Briefcase },
-    { id: 'skills', label: t('nav_expertise') || 'Mastery', icon: Sparkles },
-    { id: 'achievements', label: t('nav_achievements') || 'Milestones', icon: Award },
-    { id: 'resources', label: t('nav_resources') || 'Teaching Folio', icon: FolderDown },
-    { id: 'contact', label: t('nav_contact') || 'Correspondence', icon: Send },
+    { id: 'hero', label: t('nav_home') || 'Archive' },
+    { id: 'about', label: t('nav_about') || 'About' },
+    { id: 'education', label: t('nav_education') || 'Education' },
+    { id: 'experience', label: t('nav_experience') || 'Chronicles' },
+    { id: 'skills', label: t('nav_expertise') || 'Mastery' },
+    { id: 'achievements', label: t('nav_achievements') || 'Milestones' },
+    { id: 'resources', label: t('nav_resources') || 'Teaching Folio' },
+    { id: 'contact', label: t('nav_contact') || 'Correspondence' },
   ];
 
   const scrollTo = (id) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    smoothScrollTo(id);
   };
 
   const languages = [
-    { code: 'en', label: 'English', native: 'English' },
-    { code: 'mr', label: 'Marathi', native: 'मराठी' },
-    { code: 'hi', label: 'Hindi', native: 'हिंदी' },
+    { code: 'en', native: 'English' },
+    { code: 'mr', native: 'मराठी' },
+    { code: 'hi', native: 'हिंदी' },
   ];
 
   return (
     <>
-      <header className="fixed top-4 left-0 right-0 z-40 px-3 sm:px-6 pointer-events-none transition-all duration-300">
-        <div className="max-w-7xl mx-auto flex items-center justify-between pointer-events-auto">
-          
-          {/* Logo / Scholar Crest */}
+      {/* Scroll progress hairline */}
+      <motion.div
+        style={{ scaleX: progress }}
+        className="fixed inset-x-0 top-0 z-50 h-px origin-left bg-phosphor"
+        aria-hidden="true"
+      />
+
+      <header className="pointer-events-none fixed inset-x-0 top-4 z-40 px-3 sm:px-6">
+        <div className="pointer-events-auto mx-auto flex max-w-7xl items-center justify-between gap-3">
+
+          {/* Crest */}
           <button
             onClick={() => scrollTo('hero')}
-            className="flex items-center gap-2.5 px-3 py-1.5 rounded-full nav-glass group transition-transform active:scale-95"
+            className="nav-glass group flex items-center gap-2.5 px-2.5 py-2 transition-transform active:scale-95"
           >
-            <div className="w-7 h-7 rounded-full bg-[#302117] border border-[#C1A477] flex items-center justify-center text-[#C1A477] group-hover:rotate-12 transition-transform shadow-inner">
-              <span className="font-serif font-bold text-xs">J</span>
-            </div>
-            <div className="text-left hidden sm:block">
-              <span className="text-xs font-serif font-bold tracking-wider text-[#F2E9D7] block leading-none">
-                JANARDHAN AGHAV
+            <span className="flex h-7 w-7 items-center justify-center border border-gold/60 font-serif text-sm text-gold transition-colors group-hover:border-phosphor group-hover:text-phosphor">
+              J
+            </span>
+            <span className="hidden whitespace-nowrap pr-1.5 text-left sm:block">
+              <span className="block font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-ivory">
+                Janardhan Aghav
               </span>
-              <span className="text-[10px] text-[#A67C52] tracking-widest font-mono uppercase block mt-0.5">
-                SRJC • BIOLOGY
+              <span className="mt-1 block font-mono text-[10px] uppercase leading-none tracking-[0.14em] text-bronze">
+                SRJC / Biology
               </span>
-            </div>
+            </span>
           </button>
 
-          {/* Center Links (21st.dev Style Sliding Pill Dock) */}
-          <nav className="hidden lg:flex items-center gap-1 p-1 rounded-full nav-glass relative">
-            {navLinks.map((link) => {
+          {/* Center dock with sliding pill */}
+          <nav className="nav-glass relative hidden items-center gap-0.5 p-1 xl:flex">
+            {navLinks.map((link, idx) => {
               const isActive = activeSection === link.id;
               return (
                 <button
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className={`relative px-3.5 py-1.5 text-xs font-serif tracking-wider transition-colors z-10 ${
-                    isActive ? 'text-[#211711] font-bold' : 'text-[#E8DCC5]/75 hover:text-[#F2E9D7]'
+                  className={`relative z-10 whitespace-nowrap px-2.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] transition-colors ${
+                    isActive ? 'font-medium text-ink' : 'text-parchment/65 hover:text-ivory'
                   }`}
                 >
                   {isActive && (
-                    <motion.div
+                    <motion.span
                       layoutId="activeNavPill"
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      className="absolute inset-0 bg-gradient-to-r from-[#C1A477] to-[#A67C52] rounded-full -z-10 shadow-md"
+                      className="absolute inset-0 -z-10 bg-gold"
                     />
                   )}
-                  <span>{link.label}</span>
+                  <span className={`mr-1.5 hidden 2xl:inline ${isActive ? 'text-ink/60' : 'text-bronze/70'}`}>
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  {link.label}
                 </button>
               );
             })}
           </nav>
 
-          {/* Right Actions: Language Switcher, Résumé CTA & Faculty Desk */}
-          <div className="flex items-center gap-1.5 sm:gap-2 nav-glass p-1.5 rounded-full">
-            {/* Language dropdown */}
+          {/* Right actions: language, résumé, admin */}
+          <div className="nav-glass flex items-center gap-1 p-1">
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#E8DCC5] hover:text-[#C1A477] transition-colors rounded-full hover:bg-[#A67C52]/20"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-parchment transition-colors hover:text-phosphor"
                 title="Select Language"
               >
-                <Globe size={13} className="text-[#A67C52]" />
-                <span className="uppercase font-mono text-[11px] font-medium">{language}</span>
+                <Globe size={13} className="text-bronze" />
+                <span>{language}</span>
               </button>
 
               <AnimatePresence>
                 {langDropdownOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: -8, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-2 w-32 bg-[#211711] border border-[#A67C52] rounded shadow-2xl py-1 z-50 overflow-hidden"
+                    className="nav-glass absolute right-0 top-full z-50 mt-2 w-36 py-1"
                   >
                     {languages.map((l) => (
                       <button
@@ -149,12 +144,12 @@ export default function FloatingNav() {
                           setLanguage(l.code);
                           setLangDropdownOpen(false);
                         }}
-                        className={`w-full text-left px-3 py-1.5 text-xs flex items-center justify-between hover:bg-[#A67C52]/20 transition-colors ${
-                          language === l.code ? 'text-[#C1A477] font-semibold bg-[#302117]' : 'text-[#E8DCC5]'
+                        className={`flex w-full items-center justify-between px-3 py-2 text-left text-xs transition-colors hover:bg-gold/10 ${
+                          language === l.code ? 'text-phosphor' : 'text-parchment'
                         }`}
                       >
                         <span>{l.native}</span>
-                        <span className="text-[10px] text-[#A67C52] uppercase font-mono">{l.code}</span>
+                        <span className="font-mono text-[10px] uppercase text-bronze">{l.code}</span>
                       </button>
                     ))}
                   </motion.div>
@@ -162,30 +157,28 @@ export default function FloatingNav() {
               </AnimatePresence>
             </div>
 
-            {/* 21st.dev Shimmer Download Résumé CTA */}
             <a
               href="/api/resume/download"
               download="Janardhan_Aghav_Jandy_Resume.pdf"
-              className="btn-shimmer flex items-center gap-1.5 px-3 py-1 text-xs font-serif font-medium tracking-wide bg-gradient-to-r from-[#302117] to-[#211711] text-[#C1A477] border border-[#A67C52]/80 rounded-full hover:border-[#C1A477] hover:text-[#F2E9D7] transition-all shadow-sm"
-              title="Download Vintage Academic CV (PDF)"
+              className="btn-shimmer flex items-center gap-1.5 border border-gold/50 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-gold transition-colors hover:border-phosphor hover:text-phosphor"
+              title="Download Academic CV (PDF)"
             >
-              <FileDown size={13} className="text-[#C1A477]" />
+              <FileDown size={13} />
               <span className="hidden md:inline">Résumé</span>
             </a>
 
-            {/* Admin Desk Link */}
             <a
               href="/admin"
-              className="p-1.5 text-[#A67C52] hover:text-[#C1A477] hover:bg-[#A67C52]/20 rounded-full transition-colors"
+              className="p-2 text-bronze transition-colors hover:text-phosphor"
               title="Faculty Portal"
+              aria-label="Faculty Portal"
             >
               <Lock size={13} />
             </a>
 
-            {/* Mobile menu trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-1.5 text-[#E8DCC5] hover:text-[#C1A477] transition-colors"
+              className="p-2 text-parchment transition-colors hover:text-phosphor xl:hidden"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
@@ -193,45 +186,38 @@ export default function FloatingNav() {
           </div>
         </div>
 
-        {/* Mobile dropdown menu with spring entrance */}
+        {/* Mobile index menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
-              className="lg:hidden mt-2 max-w-md mx-auto pointer-events-auto bg-[#211711]/95 backdrop-blur-xl border border-[#A67C52]/70 rounded-2xl p-4 shadow-2xl"
+              transition={{ duration: 0.2 }}
+              className="nav-glass ticks pointer-events-auto mx-auto mt-2 max-w-md p-4 xl:hidden"
             >
-              <div className="grid grid-cols-2 gap-2 mb-3">
-                {navLinks.map((link) => (
+              <div className="label mb-2">Index</div>
+              <div className="divide-y divide-line">
+                {navLinks.map((link, idx) => (
                   <button
                     key={link.id}
                     onClick={() => scrollTo(link.id)}
-                    className={`flex items-center gap-2 p-2 rounded text-xs font-serif text-left transition-colors ${
-                      activeSection === link.id
-                        ? 'bg-[#A67C52] text-[#211711] font-semibold'
-                        : 'text-[#E8DCC5] hover:bg-[#302117]'
+                    className={`flex w-full items-baseline gap-3 py-2.5 text-left transition-colors ${
+                      activeSection === link.id ? 'text-phosphor' : 'text-parchment hover:text-ivory'
                     }`}
                   >
-                    <link.icon size={13} className="shrink-0 text-[#C1A477]" />
-                    <span className="truncate">{link.label}</span>
+                    <span className="font-mono text-[10px] text-bronze">{String(idx + 1).padStart(2, '0')}</span>
+                    <span className="font-serif text-lg">{link.label}</span>
                   </button>
                 ))}
               </div>
 
-              <div className="pt-3 border-t border-[#A67C52]/30 flex items-center justify-between">
-                <a
-                  href="/api/resume/download"
-                  className="flex items-center gap-1.5 text-xs text-[#C1A477] font-serif hover:underline"
-                >
-                  <FileDown size={14} />
-                  <span>Download Academic CV (PDF)</span>
+              <div className="mt-3 flex items-center justify-between border-t border-line pt-3 font-mono text-[11px] uppercase tracking-wider">
+                <a href="/api/resume/download" className="flex items-center gap-1.5 text-gold hover:text-phosphor">
+                  <FileDown size={13} />
+                  <span>Download CV</span>
                 </a>
-
-                <a
-                  href="/admin"
-                  className="text-[11px] text-[#A67C52] font-mono hover:text-[#E8DCC5] flex items-center gap-1"
-                >
+                <a href="/admin" className="flex items-center gap-1.5 text-bronze hover:text-parchment">
                   <Lock size={12} />
                   <span>Faculty Login</span>
                 </a>

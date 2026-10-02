@@ -10,26 +10,26 @@
     "id": "prof-1",
     "name": "Janardhan Aghav",
     "displayName": "Jandy",
-    "title": "Biology Faculty / Senior Educator",
-    "institution": "SRJC, Thane",
-    "location": "Thane, Maharashtra, India",
-    "bio": "Janardhan Aghav (affectionately known to students as Jandy) is a dedicated Biology educator at SRJC, Thane. With a passion rooted in classical naturalism and modern cellular biology, he specializes in Maharashtra State Board HSC curriculum and high-yield NEET-UG mentoring. His teaching emphasizes conceptual visual diagrams, botanical classification, and the physiological logic that animates living organisms.",
+    "title": "Biology Faculty",
+    "institution": "Shubham Raje Junior College (SRJC), Thane",
+    "location": "Patlipada, Thane (West), Maharashtra, India",
+    "bio": "Janardhan Aghav (affectionately known to students as Jandy) is Biology Faculty at Shubham Raje Junior College (SRJC), Thane West, and holds an M.Sc. and a B.Ed. With a passion rooted in classical naturalism and modern cellular biology, he specializes in Maharashtra State Board HSC curriculum and high-yield NEET-UG mentoring. His teaching emphasizes conceptual visual diagrams, botanical classification, and the physiological logic that animates living organisms.",
     "philosophy": "Biology is not a tedious catalogue of nomenclature; it is the poetic architecture of existence. When a student grasps why a stomatal guard cell moves or how nucleic acid codes for enzyme synthesis, memorization yields naturally to genuine scientific insight.",
-    "quote": "To observe nature closely is to study the grandest manuscript ever written.",
+    "quote": "Teaching Biology at SRJC has been a journey of purpose. The college offers an academically rich environment, strong infrastructure, and a culture that values inquiry and discipline. I feel proud to help shape the scientific thinking of the next generation.",
     "photoUrl": "/images/portrait_jandy_engraving.svg",
-    "email": "janardhan.aghav@srjc.edu.in",
-    "phone": "+91 98200 00000",
+    "email": "info@shubhamrajecollege.com",
+    "phone": "+91 85912 88300",
     "status": "published",
     "updatedAt": "2026-10-02T12:40:25.810Z"
   },
   "education": [
     {
       "id": "edu-1",
-      "degree": "M.Sc. in Life Sciences / Biology",
-      "field": "Plant Physiology & Molecular Biology",
-      "institution": "University of Mumbai (Provisional Demo Entry)",
+      "degree": "M.Sc.",
+      "field": "Biological Sciences",
+      "institution": "University to be confirmed",
       "year": "Provisional Record",
-      "details": "Specialization in plant metabolic pathways and cellular cytology. Note: Provisional academic record awaiting formal institutional verification.",
+      "details": "Qualification as listed on the Shubham Raje Junior College faculty page. Awarding university, specialization and year have not been published and can be added via the Faculty Admin Portal.",
       "isProvisional": true,
       "orderIndex": 1,
       "status": "published"
@@ -37,10 +37,10 @@
     {
       "id": "edu-2",
       "degree": "B.Ed. (Bachelor of Education)",
-      "field": "Biological Sciences & Educational Pedagogy",
-      "institution": "State Pedagogical Institute (Provisional Demo Entry)",
+      "field": "Teacher Education",
+      "institution": "University to be confirmed",
       "year": "Provisional Record",
-      "details": "Rigorous coursework in secondary and higher-secondary educational psychology, laboratory curriculum design, and visual pedagogical methods.",
+      "details": "Qualification as listed on the Shubham Raje Junior College faculty page. Awarding university and year have not been published and can be added via the Faculty Admin Portal.",
       "isProvisional": true,
       "orderIndex": 2,
       "status": "published"
@@ -49,10 +49,10 @@
   "experience": [
     {
       "id": "exp-1",
-      "role": "Senior Biology Faculty",
-      "institution": "SRJC (Science Junior College)",
-      "period": "2018 — Present",
-      "location": "Thane, Maharashtra",
+      "role": "Biology Faculty",
+      "institution": "Shubham Raje Junior College (SRJC)",
+      "period": "Present",
+      "location": "Patlipada, Thane (West)",
       "description": "Lead instructor for Higher Secondary (Class XI & XII) Biology and NEET-UG coaching wing. Responsible for lecture series, laboratory practicals, and board examination preparedness.",
       "responsibilities": [
         "Deliver systematic lectures across Botany, Human Anatomy, Genetics, and Ecology for Class XI & XII.",
@@ -298,7 +298,7 @@
       "hi": "जीव विज्ञान प्राध्यापक एवं शैक्षिक मार्गदर्शक"
     },
     "hero_institution": {
-      "en": "SRJC, Thane, Maharashtra, India",
+      "en": "Shubham Raje Junior College (SRJC), Thane West, Maharashtra, India",
       "mr": "एसआरजेसी, ठाणे, महाराष्ट्र, भारत",
       "hi": "एसआरजेसी, ठाणे, महाराष्ट्र, भारत"
     },

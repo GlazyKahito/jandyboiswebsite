@@ -3,19 +3,21 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
-import { 
-  FileText, 
-  Download, 
-  Search, 
-  FolderDown, 
-  Filter, 
-  Sparkles, 
-  BookOpen, 
-  Languages, 
-  CheckCircle,
-  FileCode
-} from 'lucide-react';
+import { Download, Search, Languages } from 'lucide-react';
 import SpotlightCard from '@/components/ui/SpotlightCard';
+import SectionHeading from '@/components/ui/SectionHeading';
+import Reveal from '@/components/ui/Reveal';
+
+const CATEGORIES = [
+  'All',
+  'Biology Notes',
+  'Study Materials',
+  'Worksheets',
+  'Diagrams & Lab Sheets',
+  'Presentations & Question Banks'
+];
+
+const LEVELS = ['All', 'Class XI', 'Class XII', 'NEET-UG'];
 
 export default function TeachingResourcesSection({ resources = [] }) {
   const { t } = useLanguage();
@@ -23,19 +25,8 @@ export default function TeachingResourcesSection({ resources = [] }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
 
-  const categories = [
-    'All',
-    'Biology Notes',
-    'Study Materials',
-    'Worksheets',
-    'Diagrams & Lab Sheets',
-    'Presentations & Question Banks'
-  ];
-
-  const levels = ['All', 'Class XI', 'Class XII', 'NEET-UG'];
-
   const filteredResources = resources.filter((res) => {
-    const matchesSearch = 
+    const matchesSearch =
       res.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       res.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       res.topic.toLowerCase().includes(searchQuery.toLowerCase());
@@ -46,51 +37,47 @@ export default function TeachingResourcesSection({ resources = [] }) {
     return matchesSearch && matchesCategory && matchesLevel;
   });
 
-  return (
-    <section id="resources" className="py-24 px-4 sm:px-6 relative bg-[#211711] border-t border-[#A67C52]/20">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* Header */}
-        <div className="text-center mb-14 space-y-2">
-          <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.2em] text-[#C1A477]">
-            <FolderDown size={15} className="text-[#A67C52]" />
-            <span>Curricular Archives &amp; Syllabi</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-gold-gradient">
-            {t('res_title') || 'The Botanical & Zoological Folio'}
-          </h2>
-          <p className="text-sm sm:text-base font-serif italic text-[#A67C52]">
-            {t('res_subtitle') || 'Downloadable Handouts, High-Yield Notes & Diagrammatic Guides'}
-          </p>
-        </div>
+  const resetFilters = () => {
+    setSearchQuery('');
+    setSelectedCategory('All');
+    setSelectedLevel('All');
+  };
 
-        {/* Filter & Search Bar with 21st.dev styling */}
-        <div className="academic-panel rounded-xl p-5 mb-10 space-y-4 shadow-xl">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            {/* Search Input */}
-            <div className="relative w-full md:w-80">
-              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A67C52]" />
+  return (
+    <section id="resources" className="relative border-t border-line bg-soot/50 px-4 py-24 sm:px-6 sm:py-32">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          index="07"
+          label="Curricular Archives & Syllabi"
+          title={t('res_title') || 'The Botanical & Zoological Folio'}
+          subtitle={t('res_subtitle') || 'Downloadable Handouts, High-Yield Notes & Diagrammatic Guides'}
+        />
+
+        {/* Query console */}
+        <Reveal className="panel mb-8">
+          <div className="flex flex-col gap-4 p-4 md:flex-row md:items-center md:justify-between sm:p-5">
+            <div className="relative w-full md:max-w-sm">
+              <Search size={15} className="absolute left-0 top-1/2 -translate-y-1/2 text-bronze" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('res_search_placeholder') || "Search notes, diagrams, topics..."}
-                className="w-full pl-10 pr-4 py-2 bg-[#191715] border border-[#A67C52]/50 rounded text-xs sm:text-sm text-[#E8DCC5] placeholder:text-[#E8DCC5]/40 focus:outline-none focus:border-[#C1A477] transition-colors"
+                className="field pl-7"
               />
             </div>
 
-            {/* Academic Level Select */}
-            <div className="flex items-center gap-2 w-full md:w-auto">
-              <span className="text-xs font-mono uppercase text-[#A67C52] shrink-0">Level:</span>
-              <div className="flex gap-1.5 overflow-x-auto pb-1 w-full md:w-auto">
-                {levels.map((lvl) => (
+            <div className="flex items-center gap-3">
+              <span className="label shrink-0">Level</span>
+              <div className="flex gap-1.5 overflow-x-auto">
+                {LEVELS.map((lvl) => (
                   <button
                     key={lvl}
                     onClick={() => setSelectedLevel(lvl)}
-                    className={`px-3 py-1 rounded-full text-xs font-mono transition-all shrink-0 ${
+                    className={`shrink-0 border px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wider transition-colors ${
                       selectedLevel === lvl
-                        ? 'bg-[#A67C52] text-[#211711] font-bold shadow'
-                        : 'bg-[#191715] text-[#E8DCC5]/70 hover:text-[#E8DCC5] border border-[#A67C52]/30'
+                        ? 'border-gold bg-gold text-ink'
+                        : 'border-line text-parchment/65 hover:border-gold/50 hover:text-ivory'
                     }`}
                   >
                     {lvl}
@@ -100,106 +87,94 @@ export default function TeachingResourcesSection({ resources = [] }) {
             </div>
           </div>
 
-          {/* Category Tabs with 21st.dev Animated Sliding Pill */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pt-3 border-t border-[#A67C52]/20 pb-1">
-            {categories.map((cat) => {
+          {/* Category tabs with sliding underline */}
+          <div className="flex items-center gap-1 overflow-x-auto border-t border-line px-2 sm:px-3">
+            {CATEGORIES.map((cat) => {
               const isSelected = selectedCategory === cat;
               return (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`relative px-3.5 py-1.5 text-xs font-serif tracking-wide transition-colors shrink-0 ${
-                    isSelected ? 'text-[#F2E9D7] font-semibold' : 'text-[#E8DCC5]/65 hover:text-[#E8DCC5]'
+                  className={`relative shrink-0 px-3 py-3.5 font-mono text-[11px] uppercase tracking-wider transition-colors ${
+                    isSelected ? 'text-ivory' : 'text-parchment/55 hover:text-parchment'
                   }`}
                 >
+                  <span>{cat}</span>
                   {isSelected && (
-                    <motion.div
+                    <motion.span
                       layoutId="categoryPill"
                       transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                      className="absolute inset-0 bg-[#302117] border border-[#A67C52] rounded shadow-inner -z-10"
+                      className="absolute inset-x-0 -bottom-px h-px bg-phosphor"
                     />
                   )}
-                  <span>{cat}</span>
                 </button>
               );
             })}
+            <span className="label ml-auto hidden shrink-0 pl-4 pr-2 md:block">
+              {String(filteredResources.length).padStart(2, '0')} / {String(resources.length).padStart(2, '0')} records
+            </span>
           </div>
-        </div>
+        </Reveal>
 
-        {/* Resources Grid with SpotlightCards */}
         {filteredResources.length === 0 ? (
-          <div className="text-center py-16 academic-panel rounded-lg space-y-3">
-            <BookOpen size={32} className="mx-auto text-[#A67C52]/50" />
-            <p className="font-serif text-[#E8DCC5]/70 text-sm">
+          <div className="panel space-y-4 px-6 py-16 text-center">
+            <p className="font-mono text-xs text-phosphor">&gt; 0 records returned</p>
+            <p className="text-sm text-parchment/70">
               No matching biological study materials found for this query.
             </p>
-            <button
-              onClick={() => { setSearchQuery(''); setSelectedCategory('All'); setSelectedLevel('All'); }}
-              className="text-xs font-mono uppercase text-[#C1A477] underline"
-            >
+            <button onClick={resetFilters} className="btn btn-ghost">
               Reset Filters
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredResources.map((res) => (
-              <SpotlightCard
-                key={res.id}
-                spotlightColor="rgba(193, 164, 119, 0.15)"
-                className="p-5 flex flex-col justify-between group transition-transform hover:-translate-y-1 duration-300"
-              >
-                <div className="space-y-3">
-                  {/* Card Header */}
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#A67C52] bg-[#211711] px-2 py-0.5 rounded border border-[#A67C52]/30">
-                      {res.category}
-                    </span>
-                    <span className="text-[10px] font-mono text-[#73734E] bg-[#211711] px-2 py-0.5 rounded border border-[#73734E]/30">
-                      {res.classLevel}
-                    </span>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {filteredResources.map((res, idx) => (
+              <Reveal key={res.id} delay={(idx % 3) * 0.06} className="flex">
+                <SpotlightCard className="group flex w-full flex-col justify-between p-6">
+                  <div>
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="label">{res.category}</span>
+                      <span className="label shrink-0 text-moss">{res.classLevel}</span>
+                    </div>
+
+                    <h3 className="mt-6 font-serif text-xl leading-snug text-ivory transition-colors group-hover:text-gold">
+                      {res.title}
+                    </h3>
+
+                    <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-bronze">
+                      <span>{res.topic}</span>
+                      <span className="text-bronze/40">/</span>
+                      <span className="flex items-center gap-1 text-parchment/55">
+                        <Languages size={11} />
+                        {res.language}
+                      </span>
+                    </div>
+
+                    <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-parchment/65">
+                      {res.description}
+                    </p>
                   </div>
 
-                  <h3 className="text-base font-serif font-bold text-[#F2E9D7] group-hover:text-[#C1A477] transition-colors leading-snug">
-                    {res.title}
-                  </h3>
-
-                  <div className="flex items-center gap-2 text-xs font-serif text-[#A67C52]">
-                    <span className="italic">{res.topic}</span>
-                    <span>•</span>
-                    <span className="font-mono text-[11px] text-[#E8DCC5]/60 flex items-center gap-1">
-                      <Languages size={11} />
-                      {res.language}
+                  <div className="mt-7 flex items-center justify-between border-t border-line pt-4">
+                    <span className="label">
+                      {res.fileType} · {res.fileSize}
                     </span>
+
+                    <a
+                      href={res.fileUrl}
+                      download
+                      className="flex items-center gap-1.5 border border-gold/50 px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-gold transition-colors hover:border-gold hover:bg-gold hover:text-ink"
+                      title={`Download ${res.title}`}
+                    >
+                      <Download size={13} />
+                      <span>{t('res_download_btn') || 'Download'}</span>
+                    </a>
                   </div>
-
-                  <p className="text-xs font-serif text-[#E8DCC5]/75 leading-relaxed line-clamp-3">
-                    {res.description}
-                  </p>
-                </div>
-
-                {/* Card Footer: Shimmer Download Action */}
-                <div className="mt-5 pt-3 border-t border-[#A67C52]/20 flex items-center justify-between">
-                  <div className="text-[10px] font-mono text-[#A67C52]">
-                    <span>{res.fileType}</span>
-                    <span className="mx-1">•</span>
-                    <span>{res.fileSize}</span>
-                  </div>
-
-                  <a
-                    href={res.fileUrl}
-                    download
-                    className="btn-shimmer flex items-center gap-1.5 px-3 py-1.5 bg-[#302117] hover:bg-[#A67C52] hover:text-[#211711] text-[#C1A477] border border-[#A67C52]/60 rounded text-xs font-serif font-medium transition-all shadow-sm"
-                    title={`Download ${res.title}`}
-                  >
-                    <Download size={13} />
-                    <span>{t('res_download_btn') || 'Download'}</span>
-                  </a>
-                </div>
-              </SpotlightCard>
+                </SpotlightCard>
+              </Reveal>
             ))}
           </div>
         )}
-
       </div>
     </section>
   );

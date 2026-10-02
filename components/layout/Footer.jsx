@@ -2,10 +2,18 @@
 
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { Lock, FileDown, ShieldCheck, Heart } from 'lucide-react';
+import { useSmoothScroll } from '@/components/layout/SmoothScroll';
+import { Lock, FileDown, ArrowUp } from 'lucide-react';
+
+const LANGS = [
+  { code: 'en', label: 'EN' },
+  { code: 'mr', label: 'मराठी' },
+  { code: 'hi', label: 'हिंदी' },
+];
 
 export default function Footer({ profile }) {
   const { language, setLanguage } = useLanguage();
+  const { scrollTo } = useSmoothScroll();
   const p = profile || {
     name: 'Janardhan Aghav',
     displayName: 'Jandy',
@@ -13,76 +21,79 @@ export default function Footer({ profile }) {
   };
 
   return (
-    <footer className="py-12 px-4 sm:px-6 bg-[#160f0a] border-t border-[#A67C52]/30 text-[#E8DCC5]/70 text-xs font-serif">
-      <div className="max-w-6xl mx-auto space-y-8">
-        
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center justify-between">
-          <div className="md:col-span-6 space-y-2">
-            <div className="flex items-center gap-2 text-[#F2E9D7] font-bold text-sm">
-              <span className="w-6 h-6 rounded-full bg-[#302117] border border-[#A67C52] flex items-center justify-center text-[#C1A477] text-xs font-mono">
-                J
-              </span>
-              <span>{p.name} ({p.displayName}) — Faculty Portfolio</span>
-            </div>
-            <p className="text-xs text-[#E8DCC5]/60 max-w-md">
+    <footer className="relative z-10 overflow-hidden border-t border-line bg-ink px-4 pt-16 sm:px-6">
+      <div className="mx-auto max-w-7xl">
+
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
+          <div className="md:col-span-6">
+            <div className="label text-phosphor">Colophon</div>
+            <p className="mt-4 max-w-md font-serif text-2xl font-light leading-snug text-ivory">
+              {p.name} ({p.displayName}) — Faculty Portfolio
+            </p>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-parchment/60">
               Department of Biological Sciences, {p.institution}, Maharashtra, India. Dedicated to rigorous botanical and physiological scholarship.
             </p>
           </div>
 
-          <div className="md:col-span-6 flex flex-wrap items-center md:justify-end gap-4 text-xs font-mono">
-            {/* Language switcher */}
-            <div className="flex items-center gap-2 p-1 bg-[#211711] border border-[#A67C52]/30 rounded">
-              <button
-                onClick={() => setLanguage('en')}
-                className={`px-2 py-0.5 rounded text-[11px] ${language === 'en' ? 'bg-[#A67C52] text-[#211711] font-bold' : 'hover:text-[#E8DCC5]'}`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => setLanguage('mr')}
-                className={`px-2 py-0.5 rounded text-[11px] ${language === 'mr' ? 'bg-[#A67C52] text-[#211711] font-bold' : 'hover:text-[#E8DCC5]'}`}
-              >
-                मराठी
-              </button>
-              <button
-                onClick={() => setLanguage('hi')}
-                className={`px-2 py-0.5 rounded text-[11px] ${language === 'hi' ? 'bg-[#A67C52] text-[#211711] font-bold' : 'hover:text-[#E8DCC5]'}`}
-              >
-                हिंदी
-              </button>
+          <div className="md:col-span-3">
+            <div className="label">Language</div>
+            <div className="mt-4 inline-flex border border-line">
+              {LANGS.map((l) => (
+                <button
+                  key={l.code}
+                  onClick={() => setLanguage(l.code)}
+                  className={`px-3 py-1.5 font-mono text-[11px] transition-colors ${
+                    language === l.code ? 'bg-gold text-ink' : 'text-parchment/70 hover:text-ivory'
+                  }`}
+                >
+                  {l.label}
+                </button>
+              ))}
             </div>
+          </div>
 
-            {/* CV download */}
-            <a
-              href="/api/resume/download"
-              className="flex items-center gap-1 text-[#C1A477] hover:underline"
-            >
-              <FileDown size={13} />
-              <span>Download CV</span>
-            </a>
-
-            {/* Faculty Portal */}
-            <a
-              href="/admin"
-              className="flex items-center gap-1 text-[#A67C52] hover:text-[#E8DCC5] transition-colors"
-            >
-              <Lock size={12} />
-              <span>Faculty Desk</span>
-            </a>
+          <div className="md:col-span-3">
+            <div className="label">Access</div>
+            <ul className="mt-4 space-y-2.5 font-mono text-xs uppercase tracking-wider">
+              <li>
+                <a href="/api/resume/download" className="flex items-center gap-2 text-gold transition-colors hover:text-phosphor">
+                  <FileDown size={13} />
+                  <span>Download CV</span>
+                </a>
+              </li>
+              <li>
+                <a href="/admin" className="flex items-center gap-2 text-bronze transition-colors hover:text-parchment">
+                  <Lock size={12} />
+                  <span>Faculty Desk</span>
+                </a>
+              </li>
+              <li>
+                <button onClick={() => scrollTo('hero')} className="flex items-center gap-2 uppercase tracking-wider text-bronze transition-colors hover:text-parchment">
+                  <ArrowUp size={13} />
+                  <span>Back to top</span>
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Academic Colophon & Disclaimer */}
-        <div className="pt-6 border-t border-[#A67C52]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#A67C52]">
+        {/* Colophon & disclaimer */}
+        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-line pt-6 font-mono text-[11px] text-bronze sm:flex-row sm:items-center">
           <p>
             © {new Date().getFullYear()} Janardhan Aghav (Jandy). All pedagogical rights reserved.
           </p>
-
-          <p className="text-center sm:text-right font-mono text-[10px] text-[#73734E]">
-            Verified: Faculty of SRJC, Thane. Fictional sample demo records are editable via Admin.
+          <p className="text-moss sm:text-right">
+            Verified: Faculty of {p.institution}. Fictional sample demo records are editable via Admin.
           </p>
         </div>
 
+        {/* Oversized wordmark */}
+        <div
+          className="pointer-events-none mt-6 select-none whitespace-nowrap text-center font-serif text-[22vw] font-light italic leading-[0.95] text-gold/10"
+          aria-hidden="true"
+        >
+          {p.displayName}
+        </div>
       </div>
     </footer>
   );

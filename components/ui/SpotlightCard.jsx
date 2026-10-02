@@ -2,11 +2,11 @@
 
 import React, { useRef, useState } from 'react';
 
-export default function SpotlightCard({ 
-  children, 
-  className = '', 
-  spotlightColor = 'rgba(193, 164, 119, 0.12)',
-  ...props 
+export default function SpotlightCard({
+  children,
+  className = '',
+  spotlightColor = 'rgba(242, 169, 59, 0.10)',
+  ...props
 }) {
   const divRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -27,20 +27,20 @@ export default function SpotlightCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden academic-panel rounded-lg ${className}`}
+      className={`panel panel-hover ticks flex flex-col overflow-hidden ${className}`}
       {...props}
     >
-      {/* 21st.dev Interactive Radial Spotlight */}
+      {/* Cursor-tracking radial spotlight */}
       <div
         className="pointer-events-none absolute -inset-px transition-opacity duration-500"
         style={{
           opacity,
-          background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 70%)`,
+          background: `radial-gradient(380px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 70%)`,
         }}
       />
-      
+
       {/* Card Contents */}
-      <div className="relative z-10 h-full">{children}</div>
+      <div className="relative z-10 flex flex-1 flex-col justify-between">{children}</div>
     </div>
   );
 }

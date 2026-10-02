@@ -1,9 +1,29 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
-import { Feather, Compass, BookOpenCheck, Microscope, HeartHandshake } from 'lucide-react';
+import { BookOpenCheck, Microscope, HeartHandshake } from 'lucide-react';
+import SectionHeading from '@/components/ui/SectionHeading';
+import Reveal from '@/components/ui/Reveal';
+import ScrollRevealText from '@/components/ui/ScrollRevealText';
+
+const PILLARS = [
+  {
+    icon: Microscope,
+    title: 'Empirical Inquiry',
+    text: 'Moving students from rote text to observable biological phenomena in the lab.',
+  },
+  {
+    icon: BookOpenCheck,
+    title: 'Visual Blackboard Pedagogy',
+    text: 'Hand-drawn anatomical systems that demystify multi-layered physiological processes.',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'Student-Centric Guidance',
+    text: 'Individualized academic mentorship for Maharashtra HSC & NEET-UG aspirants.',
+  },
+];
 
 export default function AboutSection({ profile }) {
   const { t } = useLanguage();
@@ -13,115 +33,69 @@ export default function AboutSection({ profile }) {
   const quote = profile?.quote || 'To observe nature closely is to study the grandest manuscript ever written.';
 
   return (
-    <section id="about" className="py-24 px-4 sm:px-6 relative bg-[#1d140e] border-t border-[#A67C52]/20">
-      <div className="max-w-5xl mx-auto">
-        
-        {/* Section Header */}
-        <div className="text-center mb-16 space-y-2">
-          <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.2em] text-[#C1A477]">
-            <Feather size={14} className="text-[#A67C52]" />
-            <span>Ex Libris • Manuscript Folio</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#F2E9D7]">
-            {t('about_title') || 'Academic Philosophy & Biography'}
-          </h2>
-          <p className="text-sm sm:text-base font-serif italic text-[#A67C52]">
-            {t('about_subtitle') || 'From Botanical Specimens to Cellular Mechanisms'}
-          </p>
-        </div>
+    <section id="about" className="relative px-4 py-24 sm:px-6 sm:py-32">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          index="02"
+          label="Ex Libris / Manuscript Folio"
+          title={t('about_title') || 'Academic Philosophy & Biography'}
+          subtitle={t('about_subtitle') || 'From Botanical Specimens to Cellular Mechanisms'}
+        />
 
-        {/* The Open Journal Page Container */}
-        <div className="relative bg-[#261b14] border-2 border-[#A67C52]/60 rounded-lg p-6 sm:p-12 shadow-2xl">
-          {/* Paper double framing */}
-          <div className="absolute inset-3 border border-[#C1A477]/20 pointer-events-none rounded" />
-          
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-            
-            {/* Left Column: Philosophical Quote & Pillar Icons */}
-            <div className="md:col-span-5 space-y-6 md:border-r md:border-[#A67C52]/30 md:pr-8">
-              <div className="p-5 bg-[#302117]/70 border border-[#A67C52]/40 rounded-sm relative">
-                <span className="text-3xl font-serif text-[#C1A477] absolute -top-3 left-3 bg-[#261b14] px-1 leading-none">“</span>
-                <p className="font-serif italic text-sm text-[#E8DCC5] leading-relaxed pt-2">
-                  {quote}
-                </p>
-                <div className="mt-3 pt-3 border-t border-[#A67C52]/20 text-right">
-                  <span className="text-xs font-mono tracking-wider text-[#A67C52] uppercase">
-                    — Janardhan Aghav (Jandy)
-                  </span>
-                </div>
-              </div>
+        {/* Pull quote */}
+        <Reveal>
+          <blockquote className="border-l border-phosphor pl-6 sm:pl-10">
+            <ScrollRevealText
+              text={`“${quote}”`}
+              className="max-w-5xl font-serif text-2xl font-light italic leading-[1.2] text-ivory sm:text-4xl"
+            />
+            <footer className="label mt-6">— Janardhan Aghav (Jandy)</footer>
+          </blockquote>
+        </Reveal>
 
-              {/* Core Pillars */}
-              <div className="space-y-4 pt-2">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded bg-[#302117] border border-[#A67C52] flex items-center justify-center shrink-0 text-[#C1A477]">
-                    <Microscope size={16} />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-serif font-semibold text-[#F2E9D7]">Empirical Inquiry</h4>
-                    <p className="text-xs font-serif text-[#E8DCC5]/70">Moving students from rote text to observable biological phenomena in the lab.</p>
-                  </div>
-                </div>
+        <div className="mt-16 grid grid-cols-1 gap-12 lg:mt-24 lg:grid-cols-12 lg:gap-16">
+          {/* Biography */}
+          <Reveal className="space-y-5 text-[15px] leading-relaxed text-parchment/80 sm:text-base lg:col-span-7">
+            <p className="first-letter:float-left first-letter:mr-3 first-letter:font-serif first-letter:text-6xl first-letter:leading-[0.85] first-letter:text-gold">
+              {bio}
+            </p>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded bg-[#302117] border border-[#A67C52] flex items-center justify-center shrink-0 text-[#C1A477]">
-                    <BookOpenCheck size={16} />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-serif font-semibold text-[#F2E9D7]">Visual Blackboard Pedagogy</h4>
-                    <p className="text-xs font-serif text-[#E8DCC5]/70">Hand-drawn anatomical systems that demystify multi-layered physiological processes.</p>
-                  </div>
-                </div>
+            <p>
+              At <strong className="font-medium text-ivory">SRJC, Thane</strong>, Professor Aghav guides higher secondary students through the intricate complexities of the living kingdom. His lectures interweave historical naturalist perspectives with modern cytological breakthroughs—bridging the gap between classical taxonomy and recombinant DNA genetics.
+            </p>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded bg-[#302117] border border-[#A67C52] flex items-center justify-center shrink-0 text-[#C1A477]">
-                    <HeartHandshake size={16} />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-serif font-semibold text-[#F2E9D7]">Student-Centric Guidance</h4>
-                    <p className="text-xs font-serif text-[#E8DCC5]/70">Individualized academic mentorship for Maharashtra HSC &amp; NEET-UG aspirants.</p>
-                  </div>
-                </div>
-              </div>
+            <p>
+              Whether guiding dissecting microscope sessions or conducting rigorous NEET question deconstruction workshops, his focus remains steadfast: cultivating students who not only excel in examinations, but also possess a lifelong reverence for biological sciences.
+            </p>
+
+            <p className="border-t border-line pt-5 font-mono text-[11px] leading-relaxed text-bronze/80">
+              {t('about_demo_note') || "Note: Biographical details shown reflect provisional demo data, fully editable via the Faculty Admin Portal."}
+            </p>
+          </Reveal>
+
+          {/* Creed & pillars */}
+          <Reveal delay={0.1} className="lg:col-span-5">
+            <div className="panel ticks p-6 sm:p-8">
+              <div className="label text-phosphor">Pedagogical Creed</div>
+              <p className="mt-4 font-serif text-xl font-light leading-snug text-parchment">
+                {philosophy}
+              </p>
             </div>
 
-            {/* Right Column: Biography & Philosophy */}
-            <div className="md:col-span-7 space-y-6 text-[#E8DCC5]/90 font-serif leading-relaxed">
-              <div className="space-y-4 text-sm sm:text-base">
-                <p>
-                  <span className="text-2xl font-bold font-serif text-[#C1A477] float-left mr-2 leading-none">B</span>
-                  {bio}
-                </p>
-
-                <p>
-                  At <strong className="text-[#F2E9D7]">SRJC, Thane</strong>, Professor Aghav guides higher secondary students through the intricate complexities of the living kingdom. His lectures interweave historical naturalist perspectives with modern cytological breakthroughs—bridging the gap between classical taxonomy and recombinant DNA genetics.
-                </p>
-
-                <div className="p-4 bg-[#302117]/50 border-l-2 border-[#A67C52] my-4">
-                  <h4 className="text-xs font-mono uppercase tracking-widest text-[#C1A477] mb-1">
-                    Pedagogical Creed
-                  </h4>
-                  <p className="text-xs sm:text-sm italic text-[#E8DCC5]">
-                    {philosophy}
-                  </p>
-                </div>
-
-                <p>
-                  Whether guiding dissecting microscope sessions or conducting rigorous NEET question deconstruction workshops, his focus remains steadfast: cultivating students who not only excel in examinations, but also possess a lifelong reverence for biological sciences.
-                </p>
-              </div>
-
-              {/* Demo note */}
-              <div className="pt-4 border-t border-[#A67C52]/20">
-                <p className="text-[11px] font-mono text-[#A67C52]/80">
-                  {t('about_demo_note') || "Note: Biographical details shown reflect provisional demo data, fully editable via the Faculty Admin Portal."}
-                </p>
-              </div>
-            </div>
-
-          </div>
+            <ul className="mt-2 divide-y divide-line border-b border-line">
+              {PILLARS.map((pillar, idx) => (
+                <li key={pillar.title} className="flex items-start gap-4 py-5">
+                  <span className="font-mono text-[11px] text-bronze">{String(idx + 1).padStart(2, '0')}</span>
+                  <div className="flex-1">
+                    <h3 className="font-serif text-lg text-ivory">{pillar.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-parchment/65">{pillar.text}</p>
+                  </div>
+                  <pillar.icon size={18} className="mt-1 shrink-0 text-gold" strokeWidth={1.5} />
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
-
       </div>
     </section>
   );
