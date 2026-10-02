@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="vignette" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#3a281d" stop-opacity="0.9" />
+      <stop offset="70%" stop-color="#211711" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#140e0a" stop-opacity="1" />
+    </radialGradient>
+    <linearGradient id="bronzeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C1A477" />
+      <stop offset="50%" stop-color="#A67C52" />
+      <stop offset="100%" stop-color="#735334" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background oval -->
+  <rect width="500" height="600" fill="#211711"/>
+  <ellipse cx="250" cy="270" rx="190" ry="230" fill="url(#vignette)" stroke="#A67C52" stroke-width="2"/>
+  <ellipse cx="250" cy="270" rx="182" ry="222" fill="none" stroke="#C1A477" stroke-width="0.8" stroke-dasharray="4 2"/>
+
+  <!-- Vintage decorative corner accents -->
+  <path d="M 250 30 C 230 30 200 45 190 65 C 205 60 235 60 250 60 C 265 60 295 60 310 65 C 300 45 270 30 250 30 Z" fill="#A67C52" opacity="0.6"/>
+
+  <!-- Scholarly silhouette & naturalism engraving -->
+  <!-- Head & Bust Profile -->
+  <g fill="#E8DCC5" opacity="0.85">
+    <!-- Shoulders / Coat with antique collar -->
+    <path d="M 120 490 C 130 420 180 390 220 375 L 220 340 C 210 335 198 320 196 295 C 188 293 184 285 184 275 C 184 265 190 260 195 260 C 190 230 195 180 230 160 C 265 140 310 160 315 200 C 320 200 325 210 325 230 C 315 240 312 255 315 270 C 320 272 322 280 320 290 C 315 310 305 325 295 338 L 295 375 C 330 388 375 420 385 490 Z" fill="#302117" stroke="#A67C52" stroke-width="1.5"/>
+
+    <!-- Engraving hatch lines on portrait -->
+    <path d="M 210 230 Q 250 210 290 230" stroke="#C1A477" stroke-width="1" fill="none"/>
+    <path d="M 215 245 Q 250 225 285 245" stroke="#C1A477" stroke-width="1" fill="none"/>
+    <path d="M 220 260 Q 250 240 280 260" stroke="#C1A477" stroke-width="1" fill="none"/>
+    <path d="M 225 275 Q 250 255 275 275" stroke="#C1A477" stroke-width="1" fill="none"/>
+    
+    <!-- Scholarly spectacles/wireframe glasses -->
+    <circle cx="238" cy="225" r="14" fill="none" stroke="#C1A477" stroke-width="1.5"/>
+    <circle cx="272" cy="225" r="14" fill="none" stroke="#C1A477" stroke-width="1.5"/>
+    <path d="M 252 225 L 258 225" stroke="#C1A477" stroke-width="1.5"/>
+    <path d="M 224 225 L 210 220" stroke="#C1A477" stroke-width="1.2"/>
+    <path d="M 286 225 L 300 220" stroke="#C1A477" stroke-width="1.2"/>
+
+    <!-- Tie & Collar -->
+    <polygon points="250,370 242,420 250,470 258,420" fill="#A67C52" stroke="#C1A477" stroke-width="1"/>
+    <polygon points="230,365 250,380 235,395" fill="#E8DCC5"/>
+    <polygon points="270,365 250,380 265,395" fill="#E8DCC5"/>
+  </g>
+
+  <!-- Botanical Laurel / Specimen Branches on Sides -->
+  <g stroke="#A67C52" fill="#73734E" opacity="0.75" stroke-width="1">
+    <!-- Left branch -->
+    <path d="M 100 420 Q 90 300 115 190" fill="none"/>
+    <ellipse cx="98" cy="380" rx="12" ry="6" transform="rotate(-30 98 380)"/>
+    <ellipse cx="92" cy="330" rx="12" ry="6" transform="rotate(-40 92 330)"/>
+    <ellipse cx="96" cy="280" rx="12" ry="6" transform="rotate(-25 96 280)"/>
+    <ellipse cx="106" cy="230" rx="11" ry="5" transform="rotate(-15 106 230)"/>
+
+    <!-- Right branch -->
+    <path d="M 400 420 Q 410 300 385 190" fill="none"/>
+    <ellipse cx="402" cy="380" rx="12" ry="6" transform="rotate(30 402 380)"/>
+    <ellipse cx="408" cy="330" rx="12" ry="6" transform="rotate(40 408 330)"/>
+    <ellipse cx="404" cy="280" rx="12" ry="6" transform="rotate(25 404 280)"/>
+    <ellipse cx="394" cy="230" rx="11" ry="5" transform="rotate(15 394 230)"/>
+  </g>
+
+  <!-- Bottom Classical Ribbon / Banner -->
+  <g>
+    <path d="M 80 520 L 420 520 L 400 555 L 100 555 Z" fill="#302117" stroke="#A67C52" stroke-width="1.5"/>
+    <text x="250" y="543" font-family="Georgia, serif" font-size="14" font-weight="bold" letter-spacing="2" fill="#E8DCC5" text-anchor="middle">
+      JANARDHAN AGHAV • BIOLOGY
+    </text>
+  </g>
+
+  <!-- Botanical Taxonomy Annotation in script -->
+  <text x="250" y="580" font-family="Georgia, serif" font-style="italic" font-size="11" fill="#A67C52" text-anchor="middle">
+    SRJC Thane • Faculty of Life Sciences &amp; Natural History
+  </text>
+</svg>
