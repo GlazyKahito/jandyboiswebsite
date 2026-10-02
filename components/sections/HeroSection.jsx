@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { useSmoothScroll } from '@/components/layout/SmoothScroll';
 import { FileDown, ArrowDownRight, ArrowUpRight } from 'lucide-react';
@@ -47,8 +47,31 @@ export default function HeroSection({ profile }) {
   const plateY = useTransform(scrollY, [0, 900], [0, -70]);
   const titleY = useTransform(scrollY, [0, 900], [0, 50]);
 
+  // The 3D name leans towards the cursor
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const tilt = { stiffness: 120, damping: 18, mass: 0.4 };
+  const rotateY = useSpring(useTransform(pointerX, [-0.5, 0.5], [-9, 9]), tilt);
+  const rotateX = useSpring(useTransform(pointerY, [-0.5, 0.5], [7, -7]), tilt);
+
+  const handlePointerMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    pointerX.set((e.clientX - rect.left) / rect.width - 0.5);
+    pointerY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const handlePointerLeave = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
+
   return (
-    <section id="hero" className="relative flex min-h-screen flex-col overflow-hidden pt-32 sm:pt-36">
+    <section
+      id="hero"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      className="relative flex min-h-screen flex-col overflow-hidden pt-32 sm:pt-36"
+    >
       {/* Ambient lighting */}
       <div className="cinematic-vignette absolute inset-0" />
       <div className="pointer-events-none absolute left-1/4 top-1/4 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-phosphor/[0.07] blur-[150px]" />
@@ -70,7 +93,10 @@ export default function HeroSection({ profile }) {
               <span>{p.institution}</span>
             </motion.div>
 
-            <h1 className="mt-7 break-words font-serif text-[clamp(3.25rem,8.6vw,7.75rem)] font-light leading-[0.92] text-ivory">
+            <motion.h1
+              style={{ rotateX, rotateY, transformPerspective: 900 }}
+              className="text-3d mt-7 origin-left break-words font-serif text-[clamp(3.25rem,8.6vw,7.75rem)] font-light leading-[0.92] text-ivory"
+            >
               <motion.span
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -87,7 +113,7 @@ export default function HeroSection({ profile }) {
               >
                 {restName.join(' ')}
               </motion.span>
-            </h1>
+            </motion.h1>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}

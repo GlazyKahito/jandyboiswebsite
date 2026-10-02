@@ -22,7 +22,7 @@ export default function ScrollBand({ items = [], reverse = false }) {
           <span
             key={idx}
             className={`flex items-center font-serif text-[15vw] font-light leading-none sm:text-[9vw] ${
-              idx % 2 === 0 ? 'text-outline italic' : 'text-ivory/90'
+              idx % 2 === 0 ? 'text-outline italic' : 'text-ivory text-3d'
             }`}
           >
             {item}

@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MotionConfig } from 'framer-motion';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { SmoothScroll } from '@/components/layout/SmoothScroll';
-import BookOpeningIntro from '@/components/animations/BookOpeningIntro';
+import IntroSequence from '@/components/animations/IntroSequence';
 import FloatingNav from '@/components/navigation/FloatingNav';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
@@ -34,15 +34,19 @@ export default function PortfolioShell({ initialData }) {
     <LanguageProvider initialTranslations={translations}>
       <MotionConfig reducedMotion="user">
         <SmoothScroll paused={!introFinished}>
-          {/* Cinematic 3D book-opening intro */}
-          {!introFinished && (
-            <BookOpeningIntro onComplete={() => setIntroFinished(true)} />
-          )}
+          {/* Instrument boot-sequence intro */}
+          <AnimatePresence>
+            {!introFinished && (
+              <IntroSequence key="intro" profile={profile} onComplete={() => setIntroFinished(true)} />
+            )}
+          </AnimatePresence>
 
           {/* Main Website Experience */}
           <div className="relative min-h-screen overflow-x-clip bg-ink text-parchment">
-            {/* Fixed blueprint grid and film grain */}
+            {/* Fixed blueprint grid, colour grade, vignette and film grain */}
             <div className="pointer-events-none fixed inset-0 z-0 bg-grid" aria-hidden="true" />
+            <div className="pointer-events-none fixed inset-0 z-30 color-grade" aria-hidden="true" />
+            <div className="pointer-events-none fixed inset-0 z-30 vignette" aria-hidden="true" />
             <div className="pointer-events-none fixed inset-0 z-30 film-grain" aria-hidden="true" />
 
             <FloatingNav />

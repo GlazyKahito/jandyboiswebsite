@@ -12,7 +12,7 @@ export default function SectionHeading({ index, label, title, subtitle }) {
         <span className="h-px flex-1 bg-line" />
         <span className="hidden sm:inline">{index} / 08</span>
       </div>
-      <h2 className="mt-7 max-w-4xl font-serif text-4xl font-light leading-[1.05] text-ivory sm:text-6xl">
+      <h2 className="mt-7 max-w-4xl font-serif text-4xl font-light leading-[1.05] text-ivory text-3d-sm sm:text-6xl">
         {title}
       </h2>
       {subtitle && (

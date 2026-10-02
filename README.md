@@ -64,7 +64,7 @@
 
 A portfolio, teaching-resource archive, and academic CV for **Janardhan Aghav** — *Jandy* to his students — Biology Faculty (M.Sc., B.Ed.) at **Shubham Raje Junior College (SRJC), Thane West, Maharashtra**.
 
-It is designed to feel like a vintage laboratory instrument crossed with a naturalist's field notebook: serif display type, monospace readouts, a blueprint grid, and brass-on-black colour. The public pages open like a book; behind them sits a full admin CMS so every record on the site can be edited without touching code.
+It is designed to feel like a vintage laboratory instrument crossed with a naturalist's field notebook: serif display type, monospace readouts, a blueprint grid, and brass-on-black colour. The public pages open with an instrument boot sequence; behind them sits a full admin CMS so every record on the site can be edited without touching code.
 
 | | |
 | :-- | :-- |
@@ -82,10 +82,10 @@ It is designed to feel like a vintage laboratory instrument crossed with a natur
 <tr>
 <td width="50%" valign="top">
 
-### 📕 Cinematic book opening
-A 3D antique book opens on first visit — dust particles, warm lighting, a botanical engraving reveal, a skip control, and optional ambient audio.
+### 🎯 Boot-sequence intro
+On first visit a reticle counts to 100 beside a boot log, the name is stamped in, and the panel lifts away like a shutter. Skippable, shown once per session, and bypassed for reduced-motion visitors.
 
-<sub><code>components/animations/BookOpeningIntro.jsx</code></sub>
+<sub><code>components/animations/IntroSequence.jsx</code></sub>
 
 </td>
 <td width="50%" valign="top">
@@ -101,7 +101,7 @@ Switch between **English**, **मराठी**, and **हिंदी** without
 <td valign="top">
 
 ### 📄 Résumé PDF, generated live
-An editorial-style academic CV built on request from whatever is currently published in the data store.
+A two-column academic CV — dark sidebar for contact, qualifications and expertise; paginated main column — built on request from whatever is currently published. Sample awards are left off.
 
 <sub><code>GET /api/resume/download</code></sub>
 
@@ -192,6 +192,8 @@ Manage profile, education, experience, skills, achievements, resources (with fil
 | :-- | :-- |
 | **Smooth scroll** | Lenis drives page scrolling and nav jumps; switched off for visitors who prefer reduced motion |
 | **Blueprint grid & film grain** | A fixed CSS grid and procedural SVG noise — texture with no image assets |
+| **Colour grade** | Fixed amber key light, teal fill and a vignette layered over the whole page |
+| **3D type** | Extruded headings built from stacked text-shadows; the hero name tilts towards the cursor |
 | **Corner ticks** | Registration marks on every panel, drawn with CSS gradients (`.ticks`) |
 | **`SpotlightCard`** | A highlight that follows the cursor across skill and resource cards |
 | **Sliding pill dock** | The active nav pill glides with `layoutId="activeNavPill"` on a spring (`stiffness: 400, damping: 30`) |
@@ -246,7 +248,7 @@ jandyboiswebsite/
 │       ├── resume/download/     # live CV PDF
 │       └── resources/download/  # study folio PDFs
 ├── components/
-│   ├── animations/              # BookOpeningIntro
+│   ├── animations/              # IntroSequence
 │   ├── layout/                  # PortfolioShell, Footer
 │   ├── navigation/              # FloatingNav
 │   ├── sections/                # Hero, About, Education, Experience,

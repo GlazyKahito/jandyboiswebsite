@@ -114,6 +114,8 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     background: rgba(22, 17, 13, 0.82);
     border: 1px solid var(--color-line);
+    background-image: linear-gradient(160deg, rgba(242, 233, 215, 0.035), transparent 45%);
+    box-shadow: inset 0 1px 0 rgba(242, 233, 215, 0.05), 0 24px 40px -24px rgba(0, 0, 0, 0.8);
     transition: border-color 0.3s ease, background-color 0.3s ease;
   }
 
@@ -165,12 +167,17 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(0.97);
   }
   .btn-primary {
-    background: var(--color-gold);
+    background: linear-gradient(180deg, #E2C592 0%, #C1A477 55%, #A98654 100%);
     color: var(--color-ink);
     border: 1px solid var(--color-gold);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 3px 0 #6f5330, 0 12px 22px -8px rgba(0, 0, 0, 0.7);
+  }
+  .btn-primary:active {
+    transform: translateY(3px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 0 0 #6f5330;
   }
   .btn-primary:hover {
-    background: var(--color-phosphor);
+    background: linear-gradient(180deg, #FFD08A 0%, #F2A93B 60%, #C9801F 100%);
     border-color: var(--color-phosphor);
   }
   .btn-ghost {
@@ -208,10 +215,46 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Text gradient */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #F2E9D7 10%, #C1A477 60%, #A67C52 100%);
+  background: linear-gradient(160deg, #FFF4DA 0%, #E9C583 38%, #C1904F 72%, #8A5A2B 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* A text-shadow would show through the transparent fill */
+  text-shadow: none;
+}
+
+/* Extruded 3D type: a stack of hard shadows, then one soft cast shadow */
+.text-3d {
+  text-shadow:
+    0 1px 0 #b79a6c,
+    0 2px 0 #9a7d52,
+    0 3px 0 #7d6340,
+    0 4px 0 #5e4a30,
+    0 5px 0 #3f3120,
+    0 6px 0 #2a2015,
+    0 16px 22px rgba(0, 0, 0, 0.55);
+}
+.text-3d-sm {
+  text-shadow:
+    0 1px 0 #8f7650,
+    0 2px 0 #5e4a30,
+    0 3px 0 #2e2416,
+    0 10px 14px rgba(0, 0, 0, 0.5);
+}
+/* Gradient-filled text cannot take a text-shadow, so it gets a short filter stack instead */
+.text-3d .text-gold-gradient {
+  filter: drop-shadow(0 2px 0 #6b4c26) drop-shadow(0 3px 0 #35250f) drop-shadow(0 12px 14px rgba(0, 0, 0, 0.5));
+}
+
+/* Cinematic colour grade: warm amber key light, deep teal fill, ember rim */
+.color-grade {
+  background:
+    radial-gradient(60% 50% at 10% 0%, rgba(242, 169, 59, 0.13), transparent 70%),
+    radial-gradient(55% 48% at 100% 100%, rgba(38, 96, 88, 0.2), transparent 70%),
+    radial-gradient(38% 34% at 88% 8%, rgba(150, 62, 30, 0.12), transparent 70%);
+}
+.vignette {
+  background: radial-gradient(ellipse 80% 75% at 50% 45%, transparent 55%, rgba(4, 3, 2, 0.6) 100%);
 }
 
 /* Glass Navigation Bar */
@@ -269,18 +312,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .blink {
   animation: blink 1.4s steps(1) infinite;
-}
-
-/* 3D Book Animation */
-.perspective-1000,
-.perspective-1200 {
-  perspective: 1400px;
-}
-.transform-style-3d {
-  transform-style: preserve-3d;
-}
-.backface-hidden {
-  backface-visibility: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
