@@ -1,142 +1,380 @@
-# Janardhan Aghav (Jandy) — Cinematic Dark Academia Portfolio & Educational Archive
+<div align="center">
 
-A production-ready, vintage dark-academia personal portfolio, educational resource archive, and academic curriculum vitae website for **Janardhan Aghav (Jandy)**, Biology Faculty associated with **SRJC, Thane, Maharashtra, India**.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:191715,45:302117,100:A67C52&height=230&section=header&text=Janardhan%20Aghav&fontColor=F2E9D7&fontSize=58&fontAlignY=36&desc=%E2%80%9CJandy%E2%80%9D%20%C2%B7%20Biology%20Faculty%20%C2%B7%20SRJC%2C%20Thane&descSize=18&descAlignY=57&animation=fadeIn" alt="Janardhan Aghav — Jandy · Biology Faculty · SRJC, Thane" width="100%" />
 
-Designed as a blend of an antique scientific journal, a naturalist's field notebook, and a modern academic editorial portfolio enhanced with **21st.dev** micro-interactions, ambient lighting, and spring physics.
+<img src="https://readme-typing-svg.demolab.com/?font=Cormorant+Garamond&weight=600&size=26&duration=3500&pause=900&color=C1A477&center=true&vCenter=true&width=720&height=46&lines=A+cinematic+dark-academia+portfolio;An+antique+field+journal%2C+rebuilt+for+the+web;English+%C2%B7+%E0%A4%AE%E0%A4%B0%E0%A4%BE%E0%A4%A0%E0%A5%80+%C2%B7+%E0%A4%B9%E0%A4%BF%E0%A4%82%E0%A4%A6%E0%A5%80;Portfolio+%2B+resource+archive+%2B+admin+CMS" alt="A cinematic dark-academia portfolio" />
 
----
+<br />
 
-## 🌐 Live URLs & Access
+<a href="https://jandyboiswebsite.vercel.app"><img src="https://img.shields.io/badge/Open_the_Journal-A67C52?style=for-the-badge&logo=vercel&logoColor=F2E9D7" alt="Live site" /></a>
+<a href="https://jandyboiswebsite.vercel.app/admin"><img src="https://img.shields.io/badge/Faculty_Admin-302117?style=for-the-badge&logo=bookstack&logoColor=C1A477" alt="Faculty admin" /></a>
+<a href="https://github.com/GlazyKahito/jandyboiswebsite"><img src="https://img.shields.io/badge/Source-191715?style=for-the-badge&logo=github&logoColor=E8DCC5" alt="Source" /></a>
 
-- **Live Vercel Production:** [https://jandyboiswebsite.vercel.app](https://jandyboiswebsite.vercel.app)
-- **GitHub Repository:** [https://github.com/GlazyKahito/jandyboiswebsite](https://github.com/GlazyKahito/jandyboiswebsite)
-- **Localhost Development:** [http://localhost:3000](http://localhost:3000)
-- **Faculty Admin Chamber:** [http://localhost:3000/admin](http://localhost:3000/admin) (or `/admin` on Vercel)
+<br />
 
----
+<img src="https://img.shields.io/badge/Next.js-16-191715?style=flat-square&logo=nextdotjs&logoColor=F2E9D7" alt="Next.js 16" />
+<img src="https://img.shields.io/badge/React-19-302117?style=flat-square&logo=react&logoColor=C1A477" alt="React 19" />
+<img src="https://img.shields.io/badge/Tailwind_CSS-4-302117?style=flat-square&logo=tailwindcss&logoColor=C1A477" alt="Tailwind CSS 4" />
+<img src="https://img.shields.io/badge/Framer_Motion-13-302117?style=flat-square&logo=framer&logoColor=C1A477" alt="Framer Motion 13" />
+<img src="https://img.shields.io/badge/TypeScript-6-302117?style=flat-square&logo=typescript&logoColor=C1A477" alt="TypeScript 6" />
+<img src="https://img.shields.io/badge/Deployed_on-Vercel-73734E?style=flat-square&logo=vercel&logoColor=F2E9D7" alt="Deployed on Vercel" />
 
-## 🏛️ Academic & Professional Identity
+<br /><br />
 
-- **Educator:** Janardhan Aghav  
-- **Display Name:** Jandy  
-- **Designation:** Senior Biology Faculty / Life Sciences Educator  
-- **Institution:** SRJC, Thane, Maharashtra, India  
-- **Specializations:** Maharashtra State Board HSC Biology, NEET-UG High-Yield Pedagogy, Plant Physiology, Human Anatomy & Physiology, Cytogenetics, Laboratory Histology  
+*“To observe nature closely is to study the grandest manuscript ever written.”*
 
----
+</div>
 
-## 🎨 Design System & 21st.dev Visual Enhancements
+<br />
 
-- **Aesthetic:** Vintage Dark Academia & Naturalist Field Journal with 21st.dev luxury editorial polish
-- **Color Palette:**
-  - Deep Walnut Brown: `#211711`
-  - Dark Espresso: `#302117`
-  - Antique Bronze: `#A67C52`
-  - Muted Gold: `#C1A477`
-  - Warm Parchment: `#E8DCC5`
-  - Aged Ivory: `#F2E9D7`
-  - Muted Olive: `#73734E`
-  - Charcoal: `#191715`
-- **Typography:**
-  - Headings: Cormorant Garamond
-  - Body: Lora
-  - Devanagari Scripts (Marathi & Hindi): Noto Serif Devanagari
-- **21st.dev Component Enhancements:**
-  - **Procedural Film Grain:** Seamless SVG fractal noise texture for authentic paper feel without heavy image assets.
-  - **Ambient Radial Spotlights:** Cinematic vignette and soft warm luminescence framing page boundaries.
-  - **Cursor-Tracking `SpotlightCard`:** Specular illumination tracking pointer movement across skills and teaching resource cards.
-  - **Sliding Pill Dock:** Floating glass navigation with `framer-motion` `layoutId="activeNavPill"` spring physics (`stiffness: 400, damping: 30`).
-  - **Shimmer Specular Highlights:** Diagonal light shimmer effects on primary action buttons (`btn-shimmer`).
-  - **Interactive Sliding Category Tabs:** Smooth tab switching with `layoutId="categoryPill"` across biological study categories.
+## ❦ Contents
 
----
+<table>
+<tr>
+<td valign="top">
 
-## 🚀 Complete Feature Architecture
+**The Work**
+- [Overview](#-overview)
+- [Features](#-features)
+- [Design system](#-design-system)
 
-1. **Cinematic Opening Experience (`BookOpeningIntro.jsx`)**
-   - 3D antique book opening with ambient dust particles, lighting, botanical engraving reveal, skip control, and optional ambient audio.
-2. **Multilingual Architecture (`LanguageContext.jsx`)**
-   - Live switching across **English**, **मराठी (Marathi)**, and **हिंदी (Hindi)** with preserved local preference.
-3. **Curricular Sections**
-   - **Hero:** Vintage academic publication frontispiece with institutional credentials, metric indices, and CTAs.
-   - **About:** Open antique field notebook containing pedagogical philosophy and teaching creed.
-   - **Education:** Timeline featuring provisional M.Sc. and B.Ed. credentials with verification badges.
-   - **Experience:** Teaching chronicles at SRJC Thane with core responsibilities.
-   - **Skills:** Editorial layout of botany, zoology, cytology, genetics, and laboratory skills (no arbitrary percentages).
-   - **Achievements:** Milestones, awards, and mentorship cohorts with demo indicators.
-   - **Teaching Resources:** Functional biological catalog with category tabs, search, and direct downloads.
-   - **Contact Desk:** Vintage correspondence form with client/server validation, honeypot protection, and DB storage.
-4. **Dynamic Editorial Résumé PDF (`/api/resume/download`)**
-   - Generates a bespoke vintage academic CV in real-time pulling live published records from the database.
-5. **Study Folios (`/api/resources/download/[slug]`)**
-   - Downloadable biology handouts with checkpoints, question sets, and diagrammatic checklists.
-6. **Faculty Admin CMS (`/admin` & `/admin/dashboard`)**
-   - Full management of Profile, Education, Experience, Skills, Achievements, Teaching Resources (with file uploads), Correspondence Registry, Multilingual strings, and CV preview.
+</td>
+<td valign="top">
+
+**The Machinery**
+- [Architecture](#-architecture)
+- [Tech stack](#-tech-stack)
+- [API reference](#-api-reference)
+
+</td>
+<td valign="top">
+
+**The Workshop**
+- [Getting started](#-getting-started)
+- [Environment](#-environment)
+- [Deployment](#-deployment)
+
+</td>
+</tr>
+</table>
 
 ---
 
-## 🛠️ Tech Stack Choices & Rationale
+## 📖 Overview
 
-- **Framework:** Next.js 16 (App Router)
-- **Frontend Components:** JavaScript only (`.jsx` / `.js`) as requested
-- **Backend Services & Routes:** TypeScript (`.ts`) for strict typing and reliability
-- **Styling:** Tailwind CSS v4 & custom dark academia design tokens
-- **Animations:** Framer Motion (spring physics, layoutId transitions)
-- **Icons:** Lucide React
-- **Document Engine:** jsPDF (server & client printable PDF generation)
-- **Security & Cryptography:** bcryptjs, jose (Edge/Node.js compatible JWT sessions)
+A portfolio, teaching-resource archive, and academic CV for **Janardhan Aghav** — *Jandy* to his students — Biology Faculty at **SRJC, Thane, Maharashtra**.
 
----
+It is designed to feel like three things at once: an antique scientific journal, a naturalist's field notebook, and a modern editorial site. The public pages open like a book; behind them sits a full admin CMS so every record on the site can be edited without touching code.
 
-## 💻 Local Development Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/GlazyKahito/jandyboiswebsite.git
-   cd jandyboiswebsite
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment (Optional):**
-   ```bash
-   cp .env.example .env.local
-   ```
-
-4. **Run Development Server:**
-   ```bash
-   npm run dev
-   ```
-
-5. **Access the Application:**
-   - **Public Website:** `http://localhost:3000`
-   - **Faculty Admin Desk:** `http://localhost:3000/admin`
+| | |
+| :-- | :-- |
+| **Educator** | Janardhan Aghav (“Jandy”) |
+| **Role** | Senior Biology Faculty · Life Sciences Educator |
+| **Institution** | SRJC, Thane, Maharashtra, India |
+| **Teaches** | Maharashtra State Board HSC Biology · NEET-UG |
+| **Specialisms** | Plant Physiology · Human Anatomy & Physiology · Cytogenetics · Laboratory Histology |
 
 ---
 
-## 🔐 Provisioned Faculty Credentials
+## ✨ Features
 
-| Field | Provisioned Value |
-| :--- | :--- |
-| **Faculty Email** | `admin@jandy.edu` |
-| **Passkey** | `JandyBio2026!` |
+<table>
+<tr>
+<td width="50%" valign="top">
 
-*(Configurable via `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `.env.local`)*
+### 📕 Cinematic book opening
+A 3D antique book opens on first visit — dust particles, warm lighting, a botanical engraving reveal, a skip control, and optional ambient audio.
+
+<sub><code>components/animations/BookOpeningIntro.jsx</code></sub>
+
+</td>
+<td width="50%" valign="top">
+
+### 🌏 Three languages, live
+Switch between **English**, **मराठी**, and **हिंदी** without a reload. The choice is remembered, and every string is editable from the admin.
+
+<sub><code>context/LanguageContext.jsx</code></sub>
+
+</td>
+</tr>
+<tr>
+<td valign="top">
+
+### 📄 Résumé PDF, generated live
+An editorial-style academic CV built on request from whatever is currently published in the data store.
+
+<sub><code>GET /api/resume/download</code></sub>
+
+</td>
+<td valign="top">
+
+### 🧬 Study folios
+Downloadable biology handouts with checkpoints, question sets, and diagram checklists.
+
+<sub><code>GET /api/resources/download/[slug]</code></sub>
+
+</td>
+</tr>
+<tr>
+<td valign="top">
+
+### ✉️ Contact desk
+A vintage correspondence form with client and server validation, a honeypot field, and stored enquiries. Email delivery via Resend is optional.
+
+<sub><code>POST /api/contact</code></sub>
+
+</td>
+<td valign="top">
+
+### 🗝️ Faculty admin CMS
+Manage profile, education, experience, skills, achievements, resources (with file uploads), enquiries, and translations — plus a CV preview.
+
+<sub><code>/admin</code> → <code>/admin/dashboard</code></sub>
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary><b>The eight sections of the public page</b></summary>
+
+<br />
+
+| Section | What it is |
+| :-- | :-- |
+| **Hero** | An academic-publication frontispiece: credentials, headline metrics, calls to action |
+| **About** | An open field notebook holding the teaching philosophy and creed |
+| **Education** | A timeline of degrees, with badges marking provisional entries |
+| **Experience** | Teaching chronicle at SRJC Thane with core responsibilities |
+| **Skills** | Botany, zoology, cytology, genetics, and lab skills — an editorial layout, no arbitrary percentage bars |
+| **Achievements** | Milestones, awards, and mentorship cohorts, with demo entries labelled |
+| **Teaching Resources** | A searchable catalogue with category tabs and direct downloads |
+| **Contact** | The correspondence desk |
+
+</details>
 
 ---
 
-## 🚢 Vercel Deployment Notes
+## 🎨 Design system
 
-- Deployment succeeds with zero errors across both Edge and Node.js runtimes.
-- Built-in resilient database layer that works out-of-the-box on serverless without mandatory external services.
-- Seamless connection to Neon / Supabase PostgreSQL via `DATABASE_URL` when provided.
-- Cloud file storage via Vercel Blob (`BLOB_READ_WRITE_TOKEN`) with local fallback.
+**Vintage dark academia** — walnut, bronze, and parchment — finished with [21st.dev](https://21st.dev)-style micro-interactions.
+
+### Palette
+
+<div align="center">
+
+![Charcoal](https://img.shields.io/badge/Charcoal-%23191715-191715?style=for-the-badge&labelColor=191715)
+![Deep Walnut](https://img.shields.io/badge/Deep_Walnut-%23211711-211711?style=for-the-badge&labelColor=211711)
+![Dark Espresso](https://img.shields.io/badge/Dark_Espresso-%23302117-302117?style=for-the-badge&labelColor=302117)
+![Muted Olive](https://img.shields.io/badge/Muted_Olive-%2373734E-73734E?style=for-the-badge&labelColor=73734E)
+
+![Antique Bronze](https://img.shields.io/badge/Antique_Bronze-%23A67C52-A67C52?style=for-the-badge&labelColor=A67C52)
+![Muted Gold](https://img.shields.io/badge/Muted_Gold-%23C1A477-C1A477?style=for-the-badge&labelColor=C1A477)
+![Warm Parchment](https://img.shields.io/badge/Warm_Parchment-%23E8DCC5-E8DCC5?style=for-the-badge&labelColor=E8DCC5)
+![Aged Ivory](https://img.shields.io/badge/Aged_Ivory-%23F2E9D7-F2E9D7?style=for-the-badge&labelColor=F2E9D7)
+
+</div>
+
+### Typography
+
+| Use | Typeface |
+| :-- | :-- |
+| Headings | **Cormorant Garamond** |
+| Body | **Lora** |
+| Marathi & Hindi | **Noto Serif Devanagari** |
+
+### Motion & light
+
+| Effect | How it works |
+| :-- | :-- |
+| **Film grain** | Procedural SVG fractal noise — a paper texture with no image assets |
+| **Ambient spotlights** | Radial vignette and warm glow framing the page edges |
+| **`SpotlightCard`** | A highlight that follows the cursor across skill and resource cards |
+| **Sliding pill dock** | Floating glass nav; the active pill glides with `layoutId="activeNavPill"` on a spring (`stiffness: 400, damping: 30`) |
+| **Category tabs** | The same shared-layout trick, `layoutId="categoryPill"`, across resource categories |
+| **Button shimmer** | A diagonal light sweep on primary actions (`btn-shimmer`) |
 
 ---
 
-## 📜 Academic Integrity Note
+## 🏗 Architecture
 
-Institutional affiliation with SRJC Thane, Maharashtra is verified. Sample records (degrees, awards, experience details) are clearly identified as provisional demo content and are fully editable by Professor Janardhan Aghav through the Faculty Admin Portal.
+```mermaid
+flowchart LR
+    V([Visitor]) --> P["app/page.js<br/>public portfolio"]
+    F([Faculty]) --> A["app/admin<br/>login + dashboard"]
+
+    P -->|GET| PUB["/api/public/data"]
+    P -->|POST| CON["/api/contact"]
+    P -->|GET| PDF["/api/resume/download<br/>/api/resources/download/[slug]"]
+
+    A -->|login| AUTH["/api/auth/*<br/>bcrypt + JWT cookie"]
+    A -->|CRUD| ADM["/api/admin/*"]
+    A -->|files| UP["/api/upload"]
+
+    PUB --> S[("lib/db/store.ts<br/>data/db.json")]
+    CON --> S
+    ADM --> S
+    PDF --> G["lib/resume + lib/resources<br/>jsPDF generators"]
+    G --> S
+    UP --> U[/"public/uploads"/]
+```
+
+<details>
+<summary><b>Project layout</b></summary>
+
+```text
+jandyboiswebsite/
+├── app/
+│   ├── page.js                  # public portfolio
+│   ├── layout.js                # fonts, metadata, shell
+│   ├── globals.css              # design tokens, grain, shimmer
+│   ├── admin/                   # login + dashboard
+│   └── api/
+│       ├── auth/                # login · logout · me
+│       ├── admin/               # profile · education · experience · skills
+│       │                        # achievements · resources · enquiries · translations
+│       ├── public/data/         # everything the public page renders
+│       ├── contact/             # enquiry form
+│       ├── upload/              # resource file uploads
+│       ├── resume/download/     # live CV PDF
+│       └── resources/download/  # study folio PDFs
+├── components/
+│   ├── animations/              # BookOpeningIntro
+│   ├── layout/                  # PortfolioShell, Footer
+│   ├── navigation/              # FloatingNav
+│   ├── sections/                # Hero, About, Education, Experience,
+│   │                            # Skills, Achievements, TeachingResources, Contact
+│   └── ui/                      # SpotlightCard
+├── context/                     # LanguageContext
+├── lib/
+│   ├── auth/                    # JWT sessions
+│   ├── db/                      # JSON store + seed data
+│   ├── resume/                  # CV PDF generator
+│   └── resources/               # folio PDF generator
+└── data/db.json                 # the data store
+```
+
+</details>
+
+---
+
+## 🛠 Tech stack
+
+| Layer | Choice | Why |
+| :-- | :-- | :-- |
+| Framework | **Next.js 16** (App Router) | Pages and API routes in one deployable unit |
+| UI | **React 19**, JavaScript (`.jsx`) | Frontend kept in plain JS by request |
+| Server | **TypeScript** (`.ts`) | Typed routes, store, and generators |
+| Styling | **Tailwind CSS v4** | Custom dark-academia tokens |
+| Motion | **Framer Motion** | Spring physics and shared-layout transitions |
+| Icons | **Lucide React** | |
+| PDFs | **jsPDF** | CV and folio generation on the server |
+| Auth | **bcryptjs** + **jose** | Hashed password, signed JWT in an `httpOnly` cookie (7-day session) |
+
+---
+
+## 🔌 API reference
+
+<details>
+<summary><b>Public</b></summary>
+
+| Method | Route | Purpose |
+| :-- | :-- | :-- |
+| `GET` | `/api/public/data` | All published content for the portfolio |
+| `POST` | `/api/contact` | Submit an enquiry |
+| `GET` | `/api/resume/download` | Generate the CV as a PDF |
+| `GET` | `/api/resources/download/[slug]` | Download a study folio |
+
+</details>
+
+<details>
+<summary><b>Auth</b></summary>
+
+| Method | Route | Purpose |
+| :-- | :-- | :-- |
+| `POST` | `/api/auth/login` | Sign in, set the session cookie |
+| `POST` | `/api/auth/logout` | Clear the session cookie |
+| `GET` | `/api/auth/me` | Current session |
+
+</details>
+
+<details>
+<summary><b>Admin</b> — session required</summary>
+
+| Route | Methods |
+| :-- | :-- |
+| `/api/admin/profile` | `GET` `PUT` |
+| `/api/admin/education` | `GET` `POST` `PUT` `DELETE` |
+| `/api/admin/experience` | `GET` `POST` `PUT` `DELETE` |
+| `/api/admin/skills` | `GET` `POST` `PUT` `DELETE` |
+| `/api/admin/achievements` | `GET` `POST` `PUT` `DELETE` |
+| `/api/admin/resources` | `GET` `POST` `PUT` `DELETE` |
+| `/api/admin/enquiries` | `GET` `PUT` `DELETE` |
+| `/api/admin/translations` | `GET` `PUT` |
+| `/api/upload` | `POST` |
+
+</details>
+
+---
+
+## 🚀 Getting started
+
+```bash
+git clone https://github.com/GlazyKahito/jandyboiswebsite.git
+cd jandyboiswebsite
+npm install
+cp .env.example .env.local   # optional — sensible defaults are built in
+npm run dev
+```
+
+| | |
+| :-- | :-- |
+| Public site | <http://localhost:3000> |
+| Faculty admin | <http://localhost:3000/admin> |
+
+### Default admin sign-in
+
+| Field | Value |
+| :-- | :-- |
+| Email | `admin@jandy.edu` |
+| Passkey | `JandyBio2026!` |
+
+> [!WARNING]
+> These defaults are public — they are printed here and in `.env.example`. Set your own `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `JWT_SECRET` before any real deployment.
+
+---
+
+## ⚙️ Environment
+
+| Variable | Required | What it does |
+| :-- | :-: | :-- |
+| `ADMIN_EMAIL` | — | Admin login email. Defaults to `admin@jandy.edu` |
+| `ADMIN_PASSWORD` | — | Admin passkey, used when the data store is first seeded |
+| `JWT_SECRET` | — | Signs session tokens. **Set this in production** |
+| `RESEND_API_KEY` | — | Enables email dispatch for contact enquiries |
+| `NEXT_PUBLIC_APP_URL` | — | Canonical site URL |
+
+---
+
+## 🚢 Deployment
+
+Deployed on **Vercel** at [jandyboiswebsite.vercel.app](https://jandyboiswebsite.vercel.app). Push to `master` to ship.
+
+> [!NOTE]
+> Content lives in `data/db.json` and uploads in `public/uploads/`. Vercel's filesystem is read-only at runtime, so admin edits and uploads made on the live site won't persist the way they do locally. `.env.example` reserves `DATABASE_URL` (Postgres — Neon / Supabase) and `BLOB_READ_WRITE_TOKEN` (Vercel Blob) for this, but neither is wired into the code yet.
+
+---
+
+## 📜 Academic integrity
+
+The affiliation with SRJC Thane is verified. Sample records — degrees, awards, experience details — are **provisional demo content**, labelled as such on the site, and fully editable by Professor Aghav through the faculty admin.
+
+<div align="center">
+
+<br />
+
+<sub>Built with walnut, bronze, and a great deal of parchment.</sub>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:A67C52,55:302117,100:191715&height=120&section=footer" alt="" width="100%" />
+
+</div>
