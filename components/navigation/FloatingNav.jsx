@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { 
   FileDown, 
@@ -27,19 +28,14 @@ export default function FloatingNav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 40);
 
-      // Check current visible section
       const sections = ['hero', 'about', 'education', 'experience', 'skills', 'achievements', 'resources', 'contact'];
       for (const id of sections) {
         const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
+          if (rect.top <= 250 && rect.bottom >= 150) {
             setActiveSection(id);
             break;
           }
@@ -78,16 +74,15 @@ export default function FloatingNav() {
 
   return (
     <>
-      <header
-        className={`fixed top-4 left-0 right-0 z-40 transition-all duration-300 px-4 sm:px-6 pointer-events-none`}
-      >
+      <header className="fixed top-4 left-0 right-0 z-40 px-3 sm:px-6 pointer-events-none transition-all duration-300">
         <div className="max-w-7xl mx-auto flex items-center justify-between pointer-events-auto">
+          
           {/* Logo / Scholar Crest */}
           <button
             onClick={() => scrollTo('hero')}
-            className="flex items-center gap-2.5 px-3.5 py-2 rounded-full nav-glass group transition-transform active:scale-95"
+            className="flex items-center gap-2.5 px-3 py-1.5 rounded-full nav-glass group transition-transform active:scale-95"
           >
-            <div className="w-7 h-7 rounded-full bg-[#302117] border border-[#C1A477] flex items-center justify-center text-[#C1A477] group-hover:rotate-12 transition-transform">
+            <div className="w-7 h-7 rounded-full bg-[#302117] border border-[#C1A477] flex items-center justify-center text-[#C1A477] group-hover:rotate-12 transition-transform shadow-inner">
               <span className="font-serif font-bold text-xs">J</span>
             </div>
             <div className="text-left hidden sm:block">
@@ -100,28 +95,33 @@ export default function FloatingNav() {
             </div>
           </button>
 
-          {/* Center Links (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-full nav-glass">
+          {/* Center Links (21st.dev Style Sliding Pill Dock) */}
+          <nav className="hidden lg:flex items-center gap-1 p-1 rounded-full nav-glass relative">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <button
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className={`px-3 py-1 text-xs font-serif tracking-wider transition-all rounded-full ${
-                    isActive
-                      ? 'bg-[#A67C52] text-[#211711] font-semibold shadow-sm'
-                      : 'text-[#E8DCC5]/80 hover:text-[#F2E9D7] hover:bg-[#A67C52]/15'
+                  className={`relative px-3.5 py-1.5 text-xs font-serif tracking-wider transition-colors z-10 ${
+                    isActive ? 'text-[#211711] font-bold' : 'text-[#E8DCC5]/75 hover:text-[#F2E9D7]'
                   }`}
                 >
-                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavPill"
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                      className="absolute inset-0 bg-gradient-to-r from-[#C1A477] to-[#A67C52] rounded-full -z-10 shadow-md"
+                    />
+                  )}
+                  <span>{link.label}</span>
                 </button>
               );
             })}
           </nav>
 
           {/* Right Actions: Language Switcher, Résumé CTA & Faculty Desk */}
-          <div className="flex items-center gap-2 nav-glass px-2.5 py-1.5 rounded-full">
+          <div className="flex items-center gap-1.5 sm:gap-2 nav-glass p-1.5 rounded-full">
             {/* Language dropdown */}
             <div className="relative">
               <button
@@ -133,35 +133,43 @@ export default function FloatingNav() {
                 <span className="uppercase font-mono text-[11px] font-medium">{language}</span>
               </button>
 
-              {langDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-32 bg-[#211711] border border-[#A67C52] rounded shadow-xl py-1 z-50 overflow-hidden">
-                  {languages.map((l) => (
-                    <button
-                      key={l.code}
-                      onClick={() => {
-                        setLanguage(l.code);
-                        setLangDropdownOpen(false);
-                      }}
-                      className={`w-full text-left px-3 py-1.5 text-xs flex items-center justify-between hover:bg-[#A67C52]/20 transition-colors ${
-                        language === l.code ? 'text-[#C1A477] font-semibold bg-[#302117]' : 'text-[#E8DCC5]'
-                      }`}
-                    >
-                      <span>{l.native}</span>
-                      <span className="text-[10px] text-[#A67C52] uppercase font-mono">{l.code}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
+              <AnimatePresence>
+                {langDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full mt-2 w-32 bg-[#211711] border border-[#A67C52] rounded shadow-2xl py-1 z-50 overflow-hidden"
+                  >
+                    {languages.map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={() => {
+                          setLanguage(l.code);
+                          setLangDropdownOpen(false);
+                        }}
+                        className={`w-full text-left px-3 py-1.5 text-xs flex items-center justify-between hover:bg-[#A67C52]/20 transition-colors ${
+                          language === l.code ? 'text-[#C1A477] font-semibold bg-[#302117]' : 'text-[#E8DCC5]'
+                        }`}
+                      >
+                        <span>{l.native}</span>
+                        <span className="text-[10px] text-[#A67C52] uppercase font-mono">{l.code}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
-            {/* Download Résumé CTA */}
+            {/* 21st.dev Shimmer Download Résumé CTA */}
             <a
               href="/api/resume/download"
               download="Janardhan_Aghav_Jandy_Resume.pdf"
-              className="flex items-center gap-1.5 px-3 py-1 text-xs font-serif font-medium tracking-wide bg-[#302117] text-[#C1A477] border border-[#A67C52]/70 rounded-full hover:bg-[#A67C52] hover:text-[#211711] transition-all shadow-sm"
+              className="btn-shimmer flex items-center gap-1.5 px-3 py-1 text-xs font-serif font-medium tracking-wide bg-gradient-to-r from-[#302117] to-[#211711] text-[#C1A477] border border-[#A67C52]/80 rounded-full hover:border-[#C1A477] hover:text-[#F2E9D7] transition-all shadow-sm"
               title="Download Vintage Academic CV (PDF)"
             >
-              <FileDown size={13} />
+              <FileDown size={13} className="text-[#C1A477]" />
               <span className="hidden md:inline">Résumé</span>
             </a>
 
@@ -185,45 +193,52 @@ export default function FloatingNav() {
           </div>
         </div>
 
-        {/* Mobile dropdown menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden mt-2 max-w-md mx-auto pointer-events-auto bg-[#211711]/95 backdrop-blur-md border border-[#A67C52]/60 rounded-2xl p-4 shadow-2xl">
-            <div className="grid grid-cols-2 gap-2 mb-3">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => scrollTo(link.id)}
-                  className={`flex items-center gap-2 p-2 rounded text-xs font-serif text-left transition-colors ${
-                    activeSection === link.id
-                      ? 'bg-[#A67C52] text-[#211711] font-semibold'
-                      : 'text-[#E8DCC5] hover:bg-[#302117]'
-                  }`}
+        {/* Mobile dropdown menu with spring entrance */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              className="lg:hidden mt-2 max-w-md mx-auto pointer-events-auto bg-[#211711]/95 backdrop-blur-xl border border-[#A67C52]/70 rounded-2xl p-4 shadow-2xl"
+            >
+              <div className="grid grid-cols-2 gap-2 mb-3">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollTo(link.id)}
+                    className={`flex items-center gap-2 p-2 rounded text-xs font-serif text-left transition-colors ${
+                      activeSection === link.id
+                        ? 'bg-[#A67C52] text-[#211711] font-semibold'
+                        : 'text-[#E8DCC5] hover:bg-[#302117]'
+                    }`}
+                  >
+                    <link.icon size={13} className="shrink-0 text-[#C1A477]" />
+                    <span className="truncate">{link.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="pt-3 border-t border-[#A67C52]/30 flex items-center justify-between">
+                <a
+                  href="/api/resume/download"
+                  className="flex items-center gap-1.5 text-xs text-[#C1A477] font-serif hover:underline"
                 >
-                  <link.icon size={13} className="shrink-0 text-[#C1A477]" />
-                  <span className="truncate">{link.label}</span>
-                </button>
-              ))}
-            </div>
+                  <FileDown size={14} />
+                  <span>Download Academic CV (PDF)</span>
+                </a>
 
-            <div className="pt-3 border-t border-[#A67C52]/30 flex items-center justify-between">
-              <a
-                href="/api/resume/download"
-                className="flex items-center gap-1.5 text-xs text-[#C1A477] font-serif hover:underline"
-              >
-                <FileDown size={14} />
-                <span>Download Academic CV (PDF)</span>
-              </a>
-
-              <a
-                href="/admin"
-                className="text-[11px] text-[#A67C52] font-mono hover:text-[#E8DCC5] flex items-center gap-1"
-              >
-                <Lock size={12} />
-                <span>Faculty Login</span>
-              </a>
-            </div>
-          </div>
-        )}
+                <a
+                  href="/admin"
+                  className="text-[11px] text-[#A67C52] font-mono hover:text-[#E8DCC5] flex items-center gap-1"
+                >
+                  <Lock size={12} />
+                  <span>Faculty Login</span>
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
     </>
   );
